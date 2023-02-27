@@ -14,7 +14,6 @@ export class HeroesComponent {
   heroes: Hero[] = this.heroService.getList();
   stringify = (obj: Object) => JSON.stringify(obj);
   select = (hero: Hero) => {
-    console.log(hero);
-    this.selectedHero = hero;
+    this.heroService.setSelected(hero);
   };
 }

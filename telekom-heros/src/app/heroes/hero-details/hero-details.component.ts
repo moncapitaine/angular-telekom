@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Hero } from 'src/app/domain/hero';
+import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   selector: 'tk-toh-hero-details',
@@ -7,5 +8,8 @@ import { Hero } from 'src/app/domain/hero';
   styleUrls: ['./hero-details.component.scss'],
 })
 export class HeroDetailsComponent {
-  @Input() hero: Hero | undefined;
+  constructor(private heroService: HeroService) {
+    this.hero = this.heroService.getSelected();
+  }
+  hero: Hero | undefined;
 }

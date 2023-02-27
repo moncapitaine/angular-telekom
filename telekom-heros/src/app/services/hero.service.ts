@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mockedHeroes } from '../domain/hero';
+import { Hero, mockedHeroes } from '../domain/hero';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,17 @@ import { mockedHeroes } from '../domain/hero';
 export class HeroService {
   constructor() {}
 
+  private selectedHero?: Hero;
+
   public getList() {
     return mockedHeroes;
+  }
+
+  public setSelected(hero: Hero) {
+    this.selectedHero = hero;
+  }
+
+  public getSelected() {
+    return this.selectedHero;
   }
 }
