@@ -6,3 +6,8 @@ h2.title {
 li.selected {
   background-color: lightblue;
 }
+
+ul.heroeslist {
+  display: flex;
+  flex-direction: column;
+}

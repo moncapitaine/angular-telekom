@@ -1,6 +1,6 @@
-<app-hero-details [hero]="selectedHero"></app-hero-details>
+<tk-toh-hero-details [hero]="selectedHero"></tk-toh-hero-details>
 <div>
-  <ul>
+  <ul class="heroeslist">
     <li *ngFor="let hero of heroes" [class.selected]="hero.id === selectedHero?.id">
       <button (click)="select(hero)">Auswaehlen</button>
       {{hero.name}}
