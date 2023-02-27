@@ -18,6 +18,10 @@ export class HeroService {
     this.selectedHero$.next(hero);
   }
 
+  public getHeroById(id: string) {
+    return mockedHeroes.find((hero) => hero.id.toString() === id);
+  }
+
   // public getSelected() {
   //   console.log('getSelected', this.selectedHero);
 

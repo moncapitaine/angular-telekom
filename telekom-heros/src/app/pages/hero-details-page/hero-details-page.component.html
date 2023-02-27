@@ -1,0 +1,8 @@
+<h2 *ngIf="hero" class="title">{{hero.name | uppercase}}</h2>
+<div *ngIf="!hero">
+  Kein Held gewaehlt..
+</div>
+<div *ngIf="hero">
+  <label for="name">Hero name: </label>
+  <input id="name" [(ngModel)]="hero.name" placeholder="name">
+</div>
