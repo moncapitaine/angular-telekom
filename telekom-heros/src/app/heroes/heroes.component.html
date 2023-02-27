@@ -1,5 +1,4 @@
-<h2 *ngIf="selectedHero" class="title">{{selectedHero.name | uppercase}}</h2>
-<app-hero-details></app-hero-details>
+<app-hero-details [hero]="selectedHero"></app-hero-details>
 <div>
   <ul>
     <li *ngFor="let hero of heroes" [class.selected]="hero.id === selectedHero?.id">
