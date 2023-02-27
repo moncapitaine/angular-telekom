@@ -8,7 +8,6 @@ import { HeroService } from '../services/hero.service';
   styleUrls: ['./heroes.component.scss'],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
-  selectedHero: Hero | undefined;
   heroes: Hero[] | undefined;
 
   constructor(private heroService: HeroService) {}

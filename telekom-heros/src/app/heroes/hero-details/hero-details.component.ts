@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -7,10 +8,18 @@ import { HeroService } from 'src/app/services/hero.service';
   templateUrl: './hero-details.component.html',
   styleUrls: ['./hero-details.component.scss'],
 })
-export class HeroDetailsComponent implements OnInit {
+export class HeroDetailsComponent implements OnInit, OnDestroy {
+  selectedHeroSubscription?: Subscription;
+  hero: Hero | undefined;
   constructor(private heroService: HeroService) {}
   ngOnInit(): void {
-    this.hero = this.heroService.getSelected();
+    this.selectedHeroSubscription = this.heroService.selectedHero$.subscribe(
+      (hero) => {
+        this.hero = hero ?? undefined;
+      }
+    );
   }
-  hero: Hero | undefined;
+  ngOnDestroy(): void {
+    this.selectedHeroSubscription?.unsubscribe();
+  }
 }

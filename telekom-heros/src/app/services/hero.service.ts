@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Hero, mockedHeroes } from '../domain/hero';
 
 @Injectable({
@@ -7,20 +8,19 @@ import { Hero, mockedHeroes } from '../domain/hero';
 export class HeroService {
   constructor() {}
 
-  private selectedHero?: Hero;
+  selectedHero$ = new BehaviorSubject<Hero | null>(null);
 
   public getList() {
     return mockedHeroes;
   }
 
   public setSelected(hero: Hero) {
-    this.selectedHero = hero;
-    console.log('setSelected', hero);
+    this.selectedHero$.next(hero);
   }
 
-  public getSelected() {
-    console.log('getSelected', this.selectedHero);
+  // public getSelected() {
+  //   console.log('getSelected', this.selectedHero);
 
-    return this.selectedHero;
-  }
+  //   return this.selectedHero;
+  // }
 }
