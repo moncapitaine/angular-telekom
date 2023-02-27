@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Hero, mockedHeroes } from '../domain/hero';
 import { HeroService } from '../services/hero.service';
 
@@ -7,11 +7,18 @@ import { HeroService } from '../services/hero.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss'],
 })
-export class HeroesComponent {
-  constructor(private heroService: HeroService) {}
-  selectedHero: Hero | undefined; // bad
+export class HeroesComponent implements OnInit, OnDestroy {
+  selectedHero: Hero | undefined;
+  heroes: Hero[] | undefined;
 
-  heroes: Hero[] = this.heroService.getList();
+  constructor(private heroService: HeroService) {}
+  ngOnDestroy(): void {
+    this.heroes = undefined;
+  }
+  ngOnInit(): void {
+    this.heroes = this.heroService.getList();
+  }
+
   stringify = (obj: Object) => JSON.stringify(obj);
   select = (hero: Hero) => {
     this.heroService.setSelected(hero);

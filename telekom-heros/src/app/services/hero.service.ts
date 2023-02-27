@@ -15,9 +15,12 @@ export class HeroService {
 
   public setSelected(hero: Hero) {
     this.selectedHero = hero;
+    console.log('setSelected', hero);
   }
 
   public getSelected() {
+    console.log('getSelected', this.selectedHero);
+
     return this.selectedHero;
   }
 }
