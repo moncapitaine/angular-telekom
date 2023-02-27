@@ -1,15 +1,17 @@
 <header>
 <h1 class="title">{{ title }}</h1>
 <nav>
-  <a href="google.com">Google</a>
+  <ul>
+    <li><a href="google.com">Google</a></li>
+    <li><a routerLink="/">Home</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a routerLink="/list">List</a></li>
+    <li><a href="/list">List</a></li>
+</ul>
 </nav>
 </header>
-<hr>
-<app-heroes></app-heroes>
-<hr>
-<router-outlet>
 
-</router-outlet>
+<router-outlet></router-outlet>
 <hr>
 <footer>
   Footer nb change
