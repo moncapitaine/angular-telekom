@@ -1,6 +1,5 @@
-<div></div>
 <h2 *ngIf="hero" class="title">{{hero.name | uppercase}}</h2>
-
+<div>{{ (heroService.selectedHero$ | async)?.name }}</div>
 <div *ngIf="!hero">
   Kein Held gewaehlt..
 </div>

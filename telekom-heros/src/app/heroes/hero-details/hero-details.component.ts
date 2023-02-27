@@ -11,7 +11,7 @@ import { HeroService } from 'src/app/services/hero.service';
 export class HeroDetailsComponent implements OnInit, OnDestroy {
   selectedHeroSubscription?: Subscription;
   hero: Hero | undefined;
-  constructor(private heroService: HeroService) {}
+  constructor(public heroService: HeroService) {}
   ngOnInit(): void {
     this.selectedHeroSubscription = this.heroService.selectedHero$.subscribe(
       (hero) => {
