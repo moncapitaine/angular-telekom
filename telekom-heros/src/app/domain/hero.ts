@@ -1,6 +1,7 @@
 export interface Hero {
   id: number;
   name: string;
+  sprites?: Record<string, string | null>;
 }
 
 export const mockedHeroes: Hero[] = [

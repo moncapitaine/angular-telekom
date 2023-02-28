@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Hero, mockedHeroes } from '../domain/hero';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { Hero } from '../domain/hero';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +13,12 @@ export class HeroService {
         'https://pokeapi.co/api/v2/pokemon'
       )
       .pipe(
-        map((apiResponse) =>
-          apiResponse.results.map((pokemon, index) => ({
-            id: index,
+        map((apiResponse) => {
+          return apiResponse.results.map((pokemon, index) => ({
+            id: index + 1,
             name: pokemon.name,
-          }))
-        )
+          }));
+        })
       );
   }
 
@@ -29,8 +29,19 @@ export class HeroService {
     this.selectedHero$.next(hero);
   }
 
-  public getHeroById(id: string) {
-    return mockedHeroes.find((hero) => hero.id.toString() === id);
+  public getHeroById$(id: number): Observable<Hero> {
+    return this.httpClient
+      .get<{
+        name: string;
+        sprites: Record<string, string | null>;
+      }>(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      .pipe(
+        map((apiResponse) => ({
+          id,
+          name: apiResponse.name,
+          sprites: apiResponse.sprites,
+        }))
+      );
   }
 
   // public getSelected() {

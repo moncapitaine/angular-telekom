@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, take, tap } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -10,18 +10,27 @@ import { HeroService } from 'src/app/services/hero.service';
   styleUrls: ['./hero-details-page.component.scss'],
 })
 export class HeroDetailsPageComponent implements OnInit, OnDestroy {
-  paramsSubscription?: Subscription;
   hero?: Hero;
+  combinedSubscription?: Subscription;
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService
   ) {}
   ngOnDestroy(): void {
-    this.paramsSubscription?.unsubscribe();
+    console.log(this.combinedSubscription);
+    this.combinedSubscription?.unsubscribe();
   }
   ngOnInit(): void {
-    this.paramsSubscription = this.route.params.subscribe(
-      (params) => (this.hero = this.heroService.getHeroById(params['id']))
-    );
+    this.combinedSubscription = this.route.params
+      .pipe(tap((params) => console.log(params)))
+      .pipe(switchMap((params) => this.heroService.getHeroById$(params['id'])))
+      .pipe(take(1))
+      .subscribe((hero) => {
+        this.hero = hero;
+      });
+  }
+
+  stringify(obj: object | undefined): string {
+    return JSON.stringify(obj);
   }
 }
