@@ -25,8 +25,12 @@ export class HeroDetailsPageComponent implements OnInit, OnDestroy {
       .pipe(tap((params) => console.log(params)))
       .pipe(switchMap((params) => this.heroService.getHeroById$(params['id'])))
       .pipe(take(1))
-      .subscribe((hero) => {
-        this.hero = hero;
+      .subscribe({
+        next: (hero) => {
+          this.hero = hero;
+        },
+        error: (err) => console.error(err),
+        complete: () => console.log('final'),
       });
   }
 

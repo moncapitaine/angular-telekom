@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, take } from 'rxjs';
 import { Hero } from '../domain/hero';
 
 @Injectable({
@@ -9,8 +9,14 @@ import { Hero } from '../domain/hero';
 export class HeroService {
   constructor(private httpClient: HttpClient) {
     this.heros$ = this.httpClient
-      .get<{ results: { name: string; url: string }[] }>(
+      .get<{ results: { name: string; url: string }[]; error: string }>(
         'https://pokeapi.co/api/v2/pokemon'
+      )
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          return of({ results: [], error: err?.message ?? err.toString() });
+        })
       )
       .pipe(
         map((apiResponse) => {
