@@ -1,6 +1,6 @@
 <div>
   <ul class="heroeslist">
-    <li *ngFor="let hero of heroService.getList()">
+    <li *ngFor="let hero of heroService.heros$ | async">
       <a routerLink="/details/{{hero.id}}">
         {{hero.name}}
       </a>

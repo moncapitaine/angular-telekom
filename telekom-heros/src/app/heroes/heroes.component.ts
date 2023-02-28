@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Hero, mockedHeroes } from '../domain/hero';
 import { HeroService } from '../services/hero.service';
 
@@ -9,13 +10,16 @@ import { HeroService } from '../services/hero.service';
 })
 export class HeroesComponent implements OnInit, OnDestroy {
   heroes: Hero[] | undefined;
+  heroSubscription?: Subscription;
 
   constructor(private heroService: HeroService) {}
   ngOnDestroy(): void {
-    this.heroes = undefined;
+    this.heroSubscription?.unsubscribe();
   }
   ngOnInit(): void {
-    this.heroes = this.heroService.getList();
+    this.heroSubscription = this.heroService.heros$.subscribe(
+      (heros) => (this.heroes = heros)
+    );
   }
 
   stringify = (obj: Object) => JSON.stringify(obj);
