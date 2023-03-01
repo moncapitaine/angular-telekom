@@ -1,4 +1,9 @@
 <article>
+  <div *ngIf="error">
+    <code>
+      {{ stringify(error) }}
+    </code>
+  </div>
   <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
     <label>
       Name

@@ -53,6 +53,7 @@ app.post('/api/todo', cors(corsOptions), (req, res) => {
   const todoItem = req.body as ToDoItem;
   todoItem.id = `${testData.length + 1}`;
   testData.push(todoItem);
+  res.send(todoItem);
 });
 
 app.listen(port, host, () => {

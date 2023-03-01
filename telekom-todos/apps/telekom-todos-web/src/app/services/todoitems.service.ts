@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { ToDoItem } from '@telekom-todos/domain';
 
 @Injectable({
@@ -20,14 +20,19 @@ export class TodoitemsService {
     );
   }
 
-  save(item: ToDoItem) {
-    console.log('saving', item);
-    this.httpClient
+  save(item: ToDoItem): Observable<boolean> {
+    return this.httpClient
       .post<any>('http://localhost:3000/api/todo', item, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      .subscribe((result) => console.log(result));
+      .pipe(
+        take(1),
+        map((result) => {
+          console.log('save result', result);
+          return !!result;
+        })
+      );
   }
 }
