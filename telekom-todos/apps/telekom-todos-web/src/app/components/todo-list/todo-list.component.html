@@ -1,6 +1,6 @@
 <p>todo-list works!</p>
 <ul>
   <li *ngFor="let item of items">
-    {{ item.title }}
+    <a routerLink="/todos/{{ item.id }}">{{ item.title }}</a>
   </li>
 </ul>
