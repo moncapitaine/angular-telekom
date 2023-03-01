@@ -1,6 +1,26 @@
 <p>todo-item-details works!</p>
 <div *ngIf="!item">Loading</div>
 <div *ngIf="error">{{ error?.description }}</div>
+
+<form *ngIf="item" [formGroup]="myFormGroup">
+  <label>
+    Id
+    <input type="text" readonly formControlName="id" />
+  </label>
+  <label>
+    Title
+    <input type="text" formControlName="title" />
+    <span *ngIf="myFormGroup.get('title')?.hasError('required')"
+      >Title ist Pflicht</span
+    >
+  </label>
+  <label>
+    Description
+    <textarea type="text" formControlName="description"></textarea>
+  </label>
+  <input type="submit" value="Speichern" />
+</form>
+
 <code *ngIf="item">
   {{ stringify(item) }}
 </code>

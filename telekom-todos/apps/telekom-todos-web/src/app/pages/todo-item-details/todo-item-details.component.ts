@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToDoItem } from '@telekom-todos/domain';
 import { switchMap, tap } from 'rxjs';
@@ -10,12 +11,20 @@ import { TodoitemsService } from '../../services/todoitems.service';
   styleUrls: ['./todo-item-details.component.css'],
 })
 export class TodoItemDetailsComponent implements OnInit {
+  myFormGroup: FormGroup;
   item?: ToDoItem;
   error?: { status: number; description: string };
   constructor(
     private route: ActivatedRoute,
-    private todoItemService: TodoitemsService
-  ) {}
+    private todoItemService: TodoitemsService,
+    private fb: FormBuilder
+  ) {
+    this.myFormGroup = this.fb.group({
+      id: [''],
+      title: ['', { validators: [Validators.required] }],
+      description: [''],
+    });
+  }
   ngOnInit(): void {
     this.route.params
       .pipe(
@@ -26,7 +35,11 @@ export class TodoItemDetailsComponent implements OnInit {
       )
       .pipe(switchMap((params) => this.todoItemService.getById$(params['id'])))
       .subscribe({
-        next: (data) => (this.item = data),
+        next: (data) => {
+          this.item = data;
+
+          this.myFormGroup.setValue({ description: 'none', ...data });
+        },
         error: (err) => {
           console.error('fehler beim laden', err);
           this.error = { status: err.status, description: err.error };
