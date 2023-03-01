@@ -14,6 +14,12 @@ export class TodoitemsService {
     );
   }
 
+  getById$(id: string) {
+    return this.httpClient.get<ToDoItem>(
+      `http://localhost:3000/api/todo/${id}`
+    );
+  }
+
   save(item: ToDoItem) {
     console.log('saving', item);
     this.httpClient

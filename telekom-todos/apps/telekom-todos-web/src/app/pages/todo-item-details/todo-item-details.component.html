@@ -1,1 +1,6 @@
 <p>todo-item-details works!</p>
+<div *ngIf="!item">Loading</div>
+<div *ngIf="error">{{ error?.description }}</div>
+<code *ngIf="item">
+  {{ stringify(item) }}
+</code>

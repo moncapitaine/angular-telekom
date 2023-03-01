@@ -38,7 +38,12 @@ app.get('/api/todo', cors(corsOptions), (req, res) => {
 
 app.get('/api/todo/:id', cors(corsOptions), (req, res) => {
   const itemId = req.params['id'];
-  res.send(testData.find((item) => item.id === itemId));
+  const foundItem = testData.find((item) => item.id === itemId);
+  if (!foundItem) {
+    res.sendStatus(404);
+  } else {
+    res.send(foundItem);
+  }
 });
 
 app.use(jsonParser);
