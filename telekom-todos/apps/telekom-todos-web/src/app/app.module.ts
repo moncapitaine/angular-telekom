@@ -8,6 +8,7 @@ import { appRoutes } from './app.routes';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemDetailsComponent } from './pages/todo-item-details/todo-item-details.component';
+import { ToDoItemCreateComponent } from './pages/to-do-item-create/to-do-item-create.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TodoItemDetailsComponent } from './pages/todo-item-details/todo-item-de
     HomePageComponent,
     TodoListComponent,
     TodoItemDetailsComponent,
+    ToDoItemCreateComponent,
   ],
   imports: [
     BrowserModule,

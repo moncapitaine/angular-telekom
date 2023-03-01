@@ -26,6 +26,12 @@ app.get('/api/todo', cors(corsOptions), (req, res) => {
   res.send(testData);
 });
 
+// create new todo item
+app.post('/api/todo', cors(corsOptions), (req, res) => {
+  console.log(req);
+  req.body;
+});
+
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
