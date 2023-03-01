@@ -13,4 +13,15 @@ export class TodoitemsService {
       'http://localhost:3000/api/todo'
     );
   }
+
+  save(item: ToDoItem) {
+    console.log('saving', item);
+    this.httpClient
+      .post<any>('http://localhost:3000/api/todo', item, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .subscribe((result) => console.log(result));
+  }
 }

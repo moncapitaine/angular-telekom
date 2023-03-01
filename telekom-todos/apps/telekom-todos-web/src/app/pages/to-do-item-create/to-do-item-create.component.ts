@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToDoItem } from '@telekom-todos/domain';
+import { TodoitemsService } from '../../services/todoitems.service';
 
 @Component({
   selector: 'telekom-todos-to-do-item-create',
@@ -20,7 +16,10 @@ export class ToDoItemCreateComponent implements OnInit {
     title: 'Hallo item',
     description: 'das ist meine Description',
   };
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private todoItemsService: TodoitemsService
+  ) {
     this.myFormGroup = this.fb.group({
       title: [
         '',
@@ -34,13 +33,10 @@ export class ToDoItemCreateComponent implements OnInit {
       this.item.title = newValue.title;
       this.item.description = newValue.description;
     });
-    this.myFormGroup.statusChanges.subscribe((v) => {
-      console.log(v);
-      console.log(this.myFormGroup.get('title')?.errors);
-    });
   }
   onSubmit() {
     console.log('submitting', this.myFormGroup.value);
+    this.todoItemsService.save(this.myFormGroup.value);
   }
   stringify(obj: any) {
     return JSON.stringify(obj);

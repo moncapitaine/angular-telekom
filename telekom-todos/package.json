@@ -16,6 +16,7 @@
     "@nrwl/angular": "15.7.2",
     "@telekom/scale-components": "^3.0.0-beta.126",
     "axios": "^1.0.0",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

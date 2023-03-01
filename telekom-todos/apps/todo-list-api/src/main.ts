@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { ToDoItem } from '@telekom-todos/domain';
+import bodyParser from 'body-parser';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -22,14 +23,26 @@ const testData: ToDoItem[] = [
   },
 ];
 
+const jsonParser = bodyParser.json();
+
+app.options('/api/todo', function (req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.end();
+});
+
 app.get('/api/todo', cors(corsOptions), (req, res) => {
   res.send(testData);
 });
 
+app.use(jsonParser);
 // create new todo item
 app.post('/api/todo', cors(corsOptions), (req, res) => {
-  console.log(req);
-  req.body;
+  console.log('posted', JSON.stringify(req.body));
+  const todoItem = req.body as ToDoItem;
+  todoItem.id = `${testData.length + 1}`;
+  testData.push(todoItem);
 });
 
 app.listen(port, host, () => {
