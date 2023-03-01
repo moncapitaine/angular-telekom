@@ -48,6 +48,20 @@ export class TodoItemDetailsComponent implements OnInit {
       });
   }
 
+  onSubmit() {
+    const updatedItem = this.myFormGroup.value;
+    console.log('submitting', updatedItem);
+
+    this.todoItemService.save(updatedItem).subscribe({
+      next: (data) => console.log('success for save', data),
+      error: (err) => {
+        console.error('error saving', err);
+        this.error = { status: err.status, description: err.error };
+      },
+      complete: () => console.log('onComplete'),
+    });
+  }
+
   stringify(obj: any) {
     return JSON.stringify(obj);
   }

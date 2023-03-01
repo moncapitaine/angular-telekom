@@ -21,18 +21,34 @@ export class TodoitemsService {
   }
 
   save(item: ToDoItem): Observable<boolean> {
-    return this.httpClient
-      .post<any>('http://localhost:3000/api/todo', item, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .pipe(
-        take(1),
-        map((result) => {
-          console.log('save result', result);
-          return !!result;
+    if (item.id) {
+      return this.httpClient
+        .put<any>(`http://localhost:3000/api/todo/${item.id}`, item, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
-      );
+        .pipe(
+          take(1),
+          map((result) => {
+            console.log('save result', result);
+            return !!result;
+          })
+        );
+    } else {
+      return this.httpClient
+        .post<any>('http://localhost:3000/api/todo', item, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .pipe(
+          take(1),
+          map((result) => {
+            console.log('save result', result);
+            return !!result;
+          })
+        );
+    }
   }
 }

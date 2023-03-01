@@ -56,6 +56,20 @@ app.post('/api/todo', cors(corsOptions), (req, res) => {
   res.send(todoItem);
 });
 
+app.put('/api/todo/:id', cors(corsOptions), (req, res) => {
+  console.log('putted', JSON.stringify(req.body));
+  const todoItem = req.body as ToDoItem;
+  const itemId = req.params['id'];
+  const foundItem = testData.find((item) => item.id === itemId);
+  if (!foundItem) {
+    res.sendStatus(404);
+  } else {
+    foundItem.title = todoItem.title;
+    foundItem.description = todoItem.description;
+    res.send(true);
+  }
+});
+
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
