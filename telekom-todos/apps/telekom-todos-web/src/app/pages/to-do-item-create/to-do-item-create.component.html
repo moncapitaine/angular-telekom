@@ -1,15 +1,21 @@
 <article>
-  <form [formGroup]="myFormGroup">
+  <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
     <label>
       Name
       <input type="text" formControlName="title" />
+      <span *ngIf="myFormGroup.get('title')?.hasError('required')"
+        >Title muss angegeben</span
+      >
+      <span *ngIf="myFormGroup.get('title')?.hasError('maxlength')"
+        >Title zu lang</span
+      >
     </label>
     <label>
       Description
       <textarea formControlName="description"></textarea>
     </label>
+    <input type="submit" value="Speichern" [disabled]="!myFormGroup.valid" />
   </form>
-  <scale-button>Speichern</scale-button>
 </article>
 
 <code>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ToDoItem } from '@telekom-todos/domain';
 
 @Component({
@@ -17,7 +22,10 @@ export class ToDoItemCreateComponent implements OnInit {
   };
   constructor(private fb: FormBuilder) {
     this.myFormGroup = this.fb.group({
-      title: [''],
+      title: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(3)] },
+      ],
       description: [''],
     });
   }
@@ -26,6 +34,13 @@ export class ToDoItemCreateComponent implements OnInit {
       this.item.title = newValue.title;
       this.item.description = newValue.description;
     });
+    this.myFormGroup.statusChanges.subscribe((v) => {
+      console.log(v);
+      console.log(this.myFormGroup.get('title')?.errors);
+    });
+  }
+  onSubmit() {
+    console.log('submitting', this.myFormGroup.value);
   }
   stringify(obj: any) {
     return JSON.stringify(obj);
