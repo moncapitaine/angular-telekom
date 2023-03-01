@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToDoItem } from '@telekom-todos/domain';
 
 @Component({
@@ -8,15 +8,24 @@ import { ToDoItem } from '@telekom-todos/domain';
   styleUrls: ['./to-do-item-create.component.css'],
 })
 export class ToDoItemCreateComponent implements OnInit {
-  name = new FormControl('');
+  myFormGroup: FormGroup;
+
   item: ToDoItem = {
     id: '1',
     title: 'Hallo item',
     description: 'das ist meine Description',
   };
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.myFormGroup = this.fb.group({
+      title: [''],
+      description: [''],
+    });
+  }
   ngOnInit(): void {
-    this.name.valueChanges.subscribe((newValue) => console.log(newValue));
+    this.myFormGroup.valueChanges.subscribe((newValue: ToDoItem) => {
+      this.item.title = newValue.title;
+      this.item.description = newValue.description;
+    });
   }
   stringify(obj: any) {
     return JSON.stringify(obj);

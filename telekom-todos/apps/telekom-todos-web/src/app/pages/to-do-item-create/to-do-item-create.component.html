@@ -1,6 +1,14 @@
 <article>
-  <input type="text" [formControl]="name" />
-  <textarea [(ngModel)]="item.description"></textarea>
+  <form [formGroup]="myFormGroup">
+    <label>
+      Name
+      <input type="text" formControlName="title" />
+    </label>
+    <label>
+      Description
+      <textarea formControlName="description"></textarea>
+    </label>
+  </form>
   <scale-button>Speichern</scale-button>
 </article>
 
