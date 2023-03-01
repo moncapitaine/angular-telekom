@@ -9,6 +9,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoItemDetailsComponent } from './pages/todo-item-details/todo-item-details.component';
 import { ToDoItemCreateComponent } from './pages/to-do-item-create/to-do-item-create.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { ToDoItemCreateComponent } from './pages/to-do-item-create/to-do-item-cr
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

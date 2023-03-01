@@ -1,8 +1,9 @@
-<p>to-do-item-create works!</p>
-<form>
-  <label>
-    Name
-    <input />
-  </label>
-</form>
-<scale-button>Speichern</scale-button>
+<article>
+  <input type="text" [formControl]="name" />
+  <textarea [(ngModel)]="item.description"></textarea>
+  <scale-button>Speichern</scale-button>
+</article>
+
+<code>
+  {{ stringify(item) }}
+</code>
