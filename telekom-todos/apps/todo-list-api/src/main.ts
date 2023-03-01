@@ -36,6 +36,11 @@ app.get('/api/todo', cors(corsOptions), (req, res) => {
   res.send(testData);
 });
 
+app.get('/api/todo/:id', cors(corsOptions), (req, res) => {
+  const itemId = req.params['id'];
+  res.send(testData.find((item) => item.id === itemId));
+});
+
 app.use(jsonParser);
 // create new todo item
 app.post('/api/todo', cors(corsOptions), (req, res) => {
