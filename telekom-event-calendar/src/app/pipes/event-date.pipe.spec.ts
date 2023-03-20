@@ -1,4 +1,4 @@
-import { TelekomDatePipe } from './telekom-date.pipe';
+import { TelekomDatePipe } from './event-date.pipe';
 
 describe('TelekomDatePipe', () => {
   it('create an instance', () => {

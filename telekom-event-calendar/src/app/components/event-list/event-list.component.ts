@@ -10,16 +10,17 @@ export class EventListComponent {
   eventData: Appointment[] = [
     {
       name: 'Event A',
-      date: new Date(2023, 3, 1),
+      start: new Date(2023, 3, 1),
       description: 'Tolles Date',
     },
     {
       name: 'Event B',
-      date: new Date(2023, 3, 2),
+      start: new Date(2023, 3, 2),
+      end: new Date(2023, 3, 5),
     },
     {
       name: 'Event C',
-      date: new Date(2023, 3, 3),
+      start: new Date(2023, 3, 3),
     },
   ];
 
