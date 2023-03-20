@@ -3,7 +3,12 @@
 <ul>
   <li>Erster Listeneintrag</li>
   <li *ngFor="let event of eventData">
-    {{event}}
+    <h3>{{event.name}}</h3>
+    <p>am {{event.date | date}}</p>
+    <p>{{event.date | telekomDate}}</p>
+
+    <p>{{getFormattedDate(event.date)}}</p>
+    <p>{{event.description}}</p>
   </li>
   <li>Letzter Listeneintrag</li>
 </ul>
