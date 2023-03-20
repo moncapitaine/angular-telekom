@@ -1,7 +1,21 @@
-<h2>Hi Telekom Event Calendar</h2>
+<h2>Telekom Event Calendar</h2>
 
-<p>Hier stehen die wichtigsten Events</p>
+<header>
+  <p>
+    Logo
+  </p>
 
-<p>Huhju</p>
+  <nav>
+    <a [routerLink]="'/'">Zur Liste</a>
+    <button (click)="createAppointment()">Neuer Event</button>
+  </nav>
+  <app-month-navigator></app-month-navigator>
+</header>
 
-<app-event-list></app-event-list>
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  Hier ist unser footer
+</footer>
