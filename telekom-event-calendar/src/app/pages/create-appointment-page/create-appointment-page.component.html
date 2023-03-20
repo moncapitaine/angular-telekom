@@ -1,1 +1,20 @@
-<p>create-appointment-page works!</p>
+<form (ngSubmit)="onSubmit()" style="padding: 1em; margin: 5px; border: 1px solid black; display:flex; flex-direction: column; gap: 1em">
+  <label>
+    <span>Name</span>
+    <input [(ngModel)]="model.eventName" name="eventName" type="text" />
+  </label>
+  <label>
+    <span>Start</span>
+    <input type="date" />
+  </label>
+  <label>
+    <span>End</span>
+    <input type="date" />
+  </label>
+  <label>
+    <span>Beschreibung</span>
+    <textarea>
+    </textarea>
+  </label>
+  <input type="submit" value="speichern">
+</form>

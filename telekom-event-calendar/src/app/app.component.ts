@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'telekom-event-calendar';
+  listenLink = '/aus der AppComponent Klasse';
   constructor(private router: Router) {}
 
   protected createAppointment() {
