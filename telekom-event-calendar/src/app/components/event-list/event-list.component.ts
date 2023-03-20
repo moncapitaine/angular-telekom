@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/domain/appointment';
 
 @Component({
@@ -7,22 +8,10 @@ import { Appointment } from 'src/domain/appointment';
   styleUrls: ['./event-list.component.css'],
 })
 export class EventListComponent {
-  eventData: Appointment[] = [
-    {
-      name: 'Event A',
-      start: new Date(2023, 3, 1),
-      description: 'Tolles Date',
-    },
-    {
-      name: 'Event B',
-      start: new Date(2023, 3, 2),
-      end: new Date(2023, 3, 5),
-    },
-    {
-      name: 'Event C',
-      start: new Date(2023, 3, 3),
-    },
-  ];
+  eventData: Appointment[];
+  constructor(appointmentService: AppointmentService) {
+    this.eventData = appointmentService.getList();
+  }
 
   protected getFormattedDate(date: Date) {
     return date.toLocaleDateString();
