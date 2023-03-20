@@ -1,6 +1,14 @@
 <p>event-list works!</p>
 
 <ul>
+  <li>Erster Listeneintrag</li>
+  <li *ngFor="let event of eventData">
+    {{event}}
+  </li>
+  <li>Letzter Listeneintrag</li>
+</ul>
+
+<ul>
   <li>
     <h3>Zirkus Maximus am 1.4.2023</h3>
     <p>das wird ein tolles Event</p>
