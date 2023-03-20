@@ -1,11 +1,11 @@
 <form (ngSubmit)="onSubmit()" style="padding: 1em; margin: 5px; border: 1px solid black; display:flex; flex-direction: column; gap: 1em">
   <label>
     <span>Name</span>
-    <input [(ngModel)]="model.eventName" name="eventName" type="text" />
+    <input [(ngModel)]="model.name" name="name" type="text" />
   </label>
   <label>
     <span>Start</span>
-    <input type="date" />
+    <input type="date" [(ngModel)]="model.start" name="start" />
   </label>
   <label>
     <span>End</span>
@@ -13,8 +13,11 @@
   </label>
   <label>
     <span>Beschreibung</span>
-    <textarea>
+    <textarea [(ngModel)]="model.description" name="description">
     </textarea>
   </label>
   <input type="submit" value="speichern">
 </form>
+<div>
+  <scale-button>Click!</scale-button>
+</div>

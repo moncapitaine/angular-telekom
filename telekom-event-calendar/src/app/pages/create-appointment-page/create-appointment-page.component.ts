@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Appointment } from 'src/domain/appointment';
 
 @Component({
   selector: 'app-create-appointment-page',
@@ -6,10 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-appointment-page.component.css'],
 })
 export class CreateAppointmentPageComponent {
-  model: { eventName: string };
+  model: Partial<Appointment>;
 
   constructor() {
-    this.model = { eventName: 'Neuer Event' };
+    console.log(new Date());
+    this.model = {
+      name: 'Neuer Event',
+      start: new Date(),
+      description: 'Beschreibung',
+    };
   }
   protected onSubmit() {
     console.log('submitting...', this.model);

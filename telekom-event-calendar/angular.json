@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@telekom/scale-components/dist/scale-components/scale-components.css",
               "src/styles.css"
             ],
             "scripts": []

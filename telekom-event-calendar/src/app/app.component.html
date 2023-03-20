@@ -1,3 +1,21 @@
+
+  <scale-app-shell>
+    <scale-app-header slot="header" id="header">
+      <div slot="menu-main">
+        <scale-nav-main name="Custom Item #1"></scale-nav-main>
+        <scale-nav-main name="Custom Item #2" id="nav-main-with-mega-menu">
+          <app-mega-menu>
+            <div slot="custom-body"><pre>custom-body</pre></div>
+          </app-mega-menu>
+        </scale-nav-main>
+        <!--
+          Deprecated:
+          <scale-nav-main is-active name="Custom Item #3"></scale-nav-main>
+        -->
+        <scale-nav-main active name="Custom Item #3"></scale-nav-main>
+        <scale-nav-main name="Custom Item #4"></scale-nav-main>
+      </div>
+    </scale-app-header>
 <h2>Telekom Event Calendar</h2>
 
 <header>
@@ -16,6 +34,17 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer>
-  Hier ist unser footer
-</footer>
+
+
+<scale-telekom-footer>
+  <scale-telekom-footer-content>
+    <scale-telekom-footer-extended-navigation slot="extended-navigation">
+      <scale-telekom-footer-extended-navigation-column heading="Topic One">
+       
+      </scale-telekom-footer-extended-navigation-column>
+      <!-- … -->
+    </scale-telekom-footer-extended-navigation>
+    <!-- … -->
+  </scale-telekom-footer-content>
+</scale-telekom-footer>
+<scale-app-shell>
