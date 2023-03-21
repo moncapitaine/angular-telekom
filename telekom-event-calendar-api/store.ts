@@ -22,7 +22,7 @@ let appointments: Appointment[] = [
 ]
 
 export const deleteIndex = (index: number) => {
-  appointments = [...appointments.splice(index, 1)]
+  appointments.splice(index, 1)
 }
 
 export const getList = () => appointments
