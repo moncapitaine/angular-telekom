@@ -1,4 +1,5 @@
 export interface Appointment {
+  id?: string;
   name: string;
   start: Date;
   end?: Date;
