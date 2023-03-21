@@ -18,7 +18,8 @@ app.get('/appointments', (req, res) => {
 })
 
 app.post('/appointments', (req, res) => {
-  const newAppointment = req.body as Appointment
+  const newAppointment = req.body
+  console.log(req.body)
   newAppointment.id = (appointments.length + 1).toString()
   appointments.push(newAppointment)
   res.send(newAppointment)

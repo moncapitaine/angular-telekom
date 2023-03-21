@@ -17,7 +17,7 @@ interface AppointmentApiItem {
 export class AppointmentService {
   public appointmentList$: Observable<Appointment[]>;
 
-  constructor(http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.appointmentList$ = http
       .get<AppointmentApiItem[]>('http://localhost:4000/appointments')
       .pipe(
@@ -42,5 +42,14 @@ export class AppointmentService {
           }))
         )
       );
+  }
+  public addNew(newItem: Appointment) {
+    this.http
+      .post('http://localhost:4000/appointments', newItem, {
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      .subscribe((result) => console.log(result));
   }
 }

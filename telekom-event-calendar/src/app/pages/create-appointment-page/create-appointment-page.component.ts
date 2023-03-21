@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/domain/appointment';
 
 @Component({
@@ -9,7 +10,7 @@ import { Appointment } from 'src/domain/appointment';
 export class CreateAppointmentPageComponent {
   model: Partial<Appointment>;
 
-  constructor() {
+  constructor(private service: AppointmentService) {
     console.log(new Date());
     this.model = {
       name: 'Neuer Event',
@@ -19,6 +20,7 @@ export class CreateAppointmentPageComponent {
   }
   protected machsJetzt() {
     console.log('submitting...', this.model);
+    this.service.addNew(this.model as Appointment);
     // appointmentService erweitern um ein addNew
     // appointmentService aufrufen und einen neuen Eintrag erzeugen
   }
