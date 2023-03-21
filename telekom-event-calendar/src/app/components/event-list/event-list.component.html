@@ -5,6 +5,6 @@
     <h3>{{event.name}}</h3>
     <p>{{event | eventDate}}</p>
     <p>{{event.description}}</p>
-    <button>Delete</button>
+    <button (click)="handleDelete(event.id)">Delete</button>
   </li>
 </ul>

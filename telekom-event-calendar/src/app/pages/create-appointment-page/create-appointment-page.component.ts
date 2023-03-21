@@ -11,7 +11,6 @@ export class CreateAppointmentPageComponent {
   model: Partial<Appointment>;
 
   constructor(private service: AppointmentService) {
-    console.log(new Date());
     this.model = {
       name: 'Neuer Event',
       start: new Date(),

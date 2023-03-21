@@ -30,6 +30,10 @@ export class EventListComponent implements OnInit, OnDestroy {
       });
   }
 
+  protected handleDelete(id: string) {
+    this.appointmentService.delete(id);
+  }
+
   protected getFormattedDate(date: Date) {
     return date.toLocaleDateString();
   }

@@ -52,4 +52,10 @@ export class AppointmentService {
       })
       .subscribe((result) => console.log(result));
   }
+
+  public delete(id: string) {
+    this.http
+      .delete(`http://localhost:4000/appointments/${id}`)
+      .subscribe((data) => console.log('deleted', data));
+  }
 }
