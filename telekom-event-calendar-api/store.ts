@@ -6,7 +6,7 @@ export interface Appointment {
   description?: string
 }
 
-export const appointments: Appointment[] = [
+let appointments: Appointment[] = [
   {
     id: '1',
     name: 'Erstes Event aus dem Service',
@@ -20,3 +20,14 @@ export const appointments: Appointment[] = [
     end: new Date(2024, 11, 31),
   },
 ]
+
+export const deleteIndex = (index: number) => {
+  appointments = [...appointments.splice(index, 1)]
+}
+
+export const getList = () => appointments
+
+export const addItem = (newItem: Appointment) => {
+  appointments.push(newItem)
+  return appointments
+}

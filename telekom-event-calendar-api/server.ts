@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import { Appointment, appointments } from './store'
+import { addItem, Appointment, deleteIndex, getList } from './store'
 
 const PORT = 4000
 const app = express()
@@ -14,27 +14,38 @@ app.get('/', (req, res) => {
 })
 
 app.get('/appointments', (req, res) => {
-  res.send(appointments)
+  res.send(getList())
 })
 
 app.post('/appointments', (req, res) => {
   const newAppointment = req.body
   console.log(req.body)
-  newAppointment.id = (appointments.length + 1).toString()
-  appointments.push(newAppointment)
+  newAppointment.id = (getList().length + 1).toString()
+  addItem(newAppointment)
   res.send(newAppointment)
 })
 
 app.put('/appointments/:id', (req, res) => {
   const appointment = req.body as Appointment
   const appointmentId = req.params['id']
-  const foundItem = appointments.find((item) => item.id === appointmentId)
+  const foundItem = getList().find((item) => item.id === appointmentId)
   if (!foundItem) {
     res.sendStatus(404)
   } else {
     foundItem.name = appointment.name
     foundItem.start = appointment.start
     res.send(true)
+  }
+})
+
+// @ts-ignore
+app.delete('/appointments/:id', (req, res) => {
+  const appointmentId = req.params['id']
+  const foundIndex = getList().findIndex((item) => item.id === appointmentId)
+  if (foundIndex < 0) {
+    res.sendStatus(404)
+  } else {
+    deleteIndex(foundIndex)
   }
 })
 
