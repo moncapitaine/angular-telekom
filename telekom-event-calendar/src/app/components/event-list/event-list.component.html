@@ -1,4 +1,5 @@
 <h3>Liste der Events</h3>
+<button (click)="loadData()">Lade!</button>
 <scale-loading-spinner *ngIf="!eventData" text="Loading..."></scale-loading-spinner>
 <ul *ngIf="eventData">
   <li *ngFor="let event of eventData">

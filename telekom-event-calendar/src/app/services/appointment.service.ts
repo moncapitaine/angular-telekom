@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from 'src/domain/appointment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+
+interface AppointmentApiItem {
+  id: string;
+  name: string;
+  start: string;
+  end?: string;
+  description?: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +19,19 @@ export class AppointmentService {
 
   constructor(http: HttpClient) {
     this.appointmentList$ = http
-      .get<
-        {
-          id: string;
-          name: string;
-          start: string;
-          end?: string;
-          description?: string;
-        }[]
-      >('http://localhost:4000/appointments')
+      .get<AppointmentApiItem[]>('http://localhost:4000/appointments')
       .pipe(
+        catchError((err) => {
+          console.error(err);
+          return of<AppointmentApiItem[]>([
+            {
+              id: '',
+              name: 'Fehler beim Landen aus dem Service',
+              start: new Date().toISOString(),
+              description: err.message,
+            },
+          ]);
+        }),
         map((apiList) =>
           apiList.map((apiItem) => ({
             id: apiItem.id,

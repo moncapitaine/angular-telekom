@@ -9,10 +9,17 @@ import { Appointment } from 'src/domain/appointment';
 })
 export class EventListComponent {
   eventData: Appointment[] | undefined;
-  constructor(appointmentService: AppointmentService) {
-    appointmentService.appointmentList$.subscribe(
-      (data) => (this.eventData = data)
-    );
+  constructor(private appointmentService: AppointmentService) {}
+
+  protected loadData() {
+    this.appointmentService.appointmentList$.subscribe({
+      next: (data) => (this.eventData = data),
+      error: (err) => {
+        this.eventData = [];
+        console.error(err);
+      },
+      complete: () => console.log('get complete'),
+    });
   }
 
   protected getFormattedDate(date: Date) {
