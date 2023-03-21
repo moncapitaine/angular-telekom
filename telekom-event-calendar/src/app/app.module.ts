@@ -8,6 +8,7 @@ import { MonthNavigatorComponent } from './components/month-navigator/month-navi
 import { CreateAppointmentPageComponent } from './pages/create-appointment-page/create-appointment-page.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,13 @@ import { FormsModule } from '@angular/forms';
     MonthNavigatorComponent,
     CreateAppointmentPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, CommonModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
