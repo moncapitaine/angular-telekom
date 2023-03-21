@@ -16,4 +16,6 @@ export class EventListComponent {
   protected getFormattedDate(date: Date) {
     return date.toLocaleDateString();
   }
+
+  // todo: implement delete button
 }

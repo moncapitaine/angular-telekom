@@ -17,7 +17,9 @@ export class CreateAppointmentPageComponent {
       description: 'Beschreibung',
     };
   }
-  protected onSubmit() {
+  protected machsJetzt() {
     console.log('submitting...', this.model);
+    // appointmentService erweitern um ein addNew
+    // appointmentService aufrufen und einen neuen Eintrag erzeugen
   }
 }
