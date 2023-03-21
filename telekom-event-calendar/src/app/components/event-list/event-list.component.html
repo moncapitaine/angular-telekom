@@ -1,14 +1,10 @@
 <h3>Liste der Events</h3>
-<ul>
-  <li>Erster Listeneintrag</li>
+<scale-loading-spinner *ngIf="!eventData" text="Loading..."></scale-loading-spinner>
+<ul *ngIf="eventData">
   <li *ngFor="let event of eventData">
     <h3>{{event.name}}</h3>
-    <p>am {{event.start | date}}</p>
     <p>{{event | eventDate}}</p>
-
-    <p>{{getFormattedDate(event.start)}}</p>
     <p>{{event.description}}</p>
     <button>Delete</button>
   </li>
-  <li>Letzter Listeneintrag</li>
 </ul>

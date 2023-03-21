@@ -1,27 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from 'src/domain/appointment';
 import { HttpClient } from '@angular/common/http';
-import { take } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {
-  constructor(private http: HttpClient) {
-    console.log('constructor before httpclient');
+  public appointmentList$: Observable<Appointment[]>;
 
-    http
-      .get('https://pokeapi.co/api/v2/pokemon')
-      .pipe(take(1))
-      .subscribe((data) => {
-        console.log('inside httpclient', data);
-      });
-    console.log('constructor after httpclient');
+  constructor(http: HttpClient) {
+    this.appointmentList$ = http
+      .get<
+        {
+          id: string;
+          name: string;
+          start: string;
+          end?: string;
+          description?: string;
+        }[]
+      >('http://localhost:4000/appointments')
+      .pipe(
+        map((apiList) =>
+          apiList.map((apiItem) => ({
+            id: apiItem.id,
+            name: apiItem.name,
+            start: new Date(apiItem.start),
+            end: apiItem.end ? new Date(apiItem.end) : undefined,
+            description: apiItem.description,
+          }))
+        )
+      );
   }
-
-  public getList(): Appointment[] {
-    return appointments;
-  }
-
-  // add appointment implementieren
 }

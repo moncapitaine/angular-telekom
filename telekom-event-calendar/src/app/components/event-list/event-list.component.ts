@@ -8,9 +8,11 @@ import { Appointment } from 'src/domain/appointment';
   styleUrls: ['./event-list.component.css'],
 })
 export class EventListComponent {
-  eventData: Appointment[];
+  eventData: Appointment[] | undefined;
   constructor(appointmentService: AppointmentService) {
-    this.eventData = appointmentService.getList();
+    appointmentService.appointmentList$.subscribe(
+      (data) => (this.eventData = data)
+    );
   }
 
   protected getFormattedDate(date: Date) {
