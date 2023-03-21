@@ -46,6 +46,7 @@ app.delete('/appointments/:id', (req, res) => {
     res.sendStatus(404)
   } else {
     deleteIndex(foundIndex)
+    res.sendStatus(204)
   }
 })
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from 'src/domain/appointment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
 interface AppointmentApiItem {
   id: string;
@@ -15,10 +15,37 @@ interface AppointmentApiItem {
   providedIn: 'root',
 })
 export class AppointmentService {
-  public appointmentList$: Observable<Appointment[]>;
+  private appointListSubject$ = new BehaviorSubject<Appointment[] | undefined>(
+    undefined
+  );
+  public appointmentList$ = this.appointListSubject$.asObservable();
 
   constructor(private http: HttpClient) {
-    this.appointmentList$ = http
+    this.refreshListData();
+  }
+
+  // wenn erfolgreich hinzufügen...
+  public addNew(newItem: Appointment) {
+    this.http
+      .post('http://localhost:4000/appointments', newItem, {
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      .subscribe((result) => this.refreshListData());
+  }
+
+  public delete(id: string) {
+    this.http
+      .delete(`http://localhost:4000/appointments/${id}`)
+      .subscribe((data) => {
+        console.log('deleted', data);
+        this.refreshListData();
+      });
+  }
+
+  private refreshListData() {
+    this.http
       .get<AppointmentApiItem[]>('http://localhost:4000/appointments')
       .pipe(
         catchError((err) => {
@@ -41,21 +68,10 @@ export class AppointmentService {
             description: apiItem.description,
           }))
         )
-      );
-  }
-  public addNew(newItem: Appointment) {
-    this.http
-      .post('http://localhost:4000/appointments', newItem, {
-        headers: {
-          'content-type': 'application/json',
-        },
-      })
-      .subscribe((result) => console.log(result));
-  }
-
-  public delete(id: string) {
-    this.http
-      .delete(`http://localhost:4000/appointments/${id}`)
-      .subscribe((data) => console.log('deleted', data));
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.appointListSubject$.next(data);
+      });
   }
 }
