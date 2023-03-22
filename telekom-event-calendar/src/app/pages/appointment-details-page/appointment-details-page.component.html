@@ -3,7 +3,7 @@
 <br>
 <a routerLink="/appointment/3">3er</a>
 
-<form [formGroup]="meineFormGruppe">
+<form (ngSubmit)="onSubmit()" [formGroup]="meineFormGruppe">
   <label>
     <span>Name</span>
     <input formControlName="name" type="text">

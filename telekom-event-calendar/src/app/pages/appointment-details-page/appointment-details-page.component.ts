@@ -5,7 +5,7 @@ import {
   RequiredValidator,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, of, Subscription, switchMap } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PlaygroundService } from 'src/app/services/playground.service';
@@ -24,7 +24,8 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
   constructor(
     fb: FormBuilder,
     private activedRoute: ActivatedRoute,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private router: Router
   ) {
     this.meineFormGruppe = fb.group({
       name: [
@@ -70,5 +71,13 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
+  }
+
+  onSubmit() {
+    const appointmentId = this.activedRoute.snapshot.params['appointmentId'];
+    this.appointmentService.update(appointmentId, this.meineFormGruppe.value, {
+      onSuccess: () => this.router.navigateByUrl('/'),
+      onError: (err) => alert(err),
+    });
   }
 }

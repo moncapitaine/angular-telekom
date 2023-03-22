@@ -35,6 +35,26 @@ export class AppointmentService {
       .subscribe((result) => this.refreshListData());
   }
 
+  public update(
+    id: string,
+    updatedAppointment: Appointment,
+    options?: { onSuccess?: () => void; onError?: (err: any) => void }
+  ) {
+    this.http
+      .put(`http://localhost:4000/appointments/${id}`, updatedAppointment, {
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      .subscribe({
+        next: () => {
+          this.refreshListData();
+          options?.onSuccess?.(); //  ?.();
+        },
+        error: options?.onError,
+      });
+  }
+
   public delete(id: string) {
     this.http
       .delete(`http://localhost:4000/appointments/${id}`)
