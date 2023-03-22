@@ -29,7 +29,11 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
     this.meineFormGruppe = fb.group({
       name: [
         '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(5)],
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(35),
+        ],
       ],
       start: [new Date(), [createFutureDateValidator()]],
       end: [undefined],
@@ -41,6 +45,7 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
     });
     this.meineFormGruppe.statusChanges.subscribe((status) => {
       console.log('status changes', status);
+      console.log('errors', this.meineFormGruppe.get('name')?.errors);
     });
   }
   ngOnInit(): void {

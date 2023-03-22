@@ -7,7 +7,9 @@
   <label>
     <span>Name</span>
     <input formControlName="name" type="text">
-    <span class="error" *ngIf="meineFormGruppe.get('name')?.errors">Fehler</span>
+    <span class="error" *ngIf="meineFormGruppe.get('name')?.errors?.['maxlength']">Fehler: Maxlength</span>
+    <span class="error" *ngIf="meineFormGruppe.get('name')?.errors?.['minlength']">Fehler: MinLength</span>
+
   </label>
   <label>
     <span>Start</span>
