@@ -5,6 +5,7 @@
     <h3>{{event.name}}</h3>
     <p>{{event | eventDate}}</p>
     <p>{{event.description}}</p>
+    <a routerLink="/appointment/{{event.id}}">Details</a>
     <button (click)="handleDelete(event.id)">Delete</button>
   </li>
 </ul>

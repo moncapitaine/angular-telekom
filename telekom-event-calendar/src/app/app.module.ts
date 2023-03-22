@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentService } from './services/appointment.service';
 import { PlaygroundPageComponent } from './pages/playground-page/playground-page.component';
+import { AppointmentDetailsPageComponent } from './pages/appointment-details-page/appointment-details-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PlaygroundPageComponent } from './pages/playground-page/playground-page
     MonthNavigatorComponent,
     CreateAppointmentPageComponent,
     PlaygroundPageComponent,
+    AppointmentDetailsPageComponent,
   ],
   imports: [
     BrowserModule,
