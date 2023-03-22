@@ -1,7 +1,7 @@
 <h3>Liste der Events</h3>
 <scale-loading-spinner *ngIf="!eventData" text="Loading..."></scale-loading-spinner>
 <ul *ngIf="eventData">
-  <li *ngFor="let event of eventData">
+  <li *ngFor="let event of eventData" [style]="'background-color: ' + backgroundColor">
     <h3>{{event.name}}</h3>
     <p>{{event | eventDate}}</p>
     <p>{{event.description}}</p>

@@ -1,4 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,7 +25,12 @@ import { Appointment } from 'src/domain/appointment';
   templateUrl: './appointment-details-page.component.html',
   styleUrls: ['./appointment-details-page.component.css'],
 })
-export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
+export class AppointmentDetailsPageComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
+  @ViewChild('nameLabel', { read: ElementRef })
+  nameLabel?: ElementRef;
+
   paramsSubscription?: Subscription;
   meineFormGruppe: FormGroup;
 
@@ -48,6 +61,11 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
       console.log('status changes', status);
       console.log('errors', this.meineFormGruppe.get('name')?.errors);
     });
+  }
+  ngAfterViewInit(): void {
+    console.log(this.nameLabel);
+    const element = this.nameLabel?.nativeElement;
+    element.setAttribute('style', 'cursor: pointer;');
   }
   ngOnInit(): void {
     this.paramsSubscription = this.activedRoute.params

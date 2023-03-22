@@ -4,7 +4,7 @@
 <a routerLink="/appointment/3">3er</a>
 
 <form (ngSubmit)="onSubmit()" [formGroup]="meineFormGruppe">
-  <label>
+  <label #nameLabel>
     <span>Name</span>
     <input formControlName="name" type="text">
     <span class="error" *ngIf="meineFormGruppe.get('name')?.errors?.['maxlength']">Fehler: Maxlength</span>
@@ -28,3 +28,5 @@
   </label>
   <input [disabled]="!meineFormGruppe.valid" type="submit" value="submit" >
 </form>
+
+<app-event-list backgroundColor="lightgrey"></app-event-list>

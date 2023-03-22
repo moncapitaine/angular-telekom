@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, take } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { Appointment } from 'src/domain/appointment';
@@ -9,6 +9,9 @@ import { Appointment } from 'src/domain/appointment';
   styleUrls: ['./event-list.component.css'],
 })
 export class EventListComponent implements OnInit, OnDestroy {
+  @Input('backgroundColor')
+  backgroundColor?: string;
+
   eventData: Appointment[] | undefined;
   appointmentListSubscription?: Subscription;
   constructor(protected appointmentService: AppointmentService) {}
