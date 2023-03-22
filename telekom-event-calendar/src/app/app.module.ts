@@ -7,7 +7,7 @@ import { TelekomDatePipe } from './pipes/event-date.pipe';
 import { MonthNavigatorComponent } from './components/month-navigator/month-navigator.component';
 import { CreateAppointmentPageComponent } from './pages/create-appointment-page/create-appointment-page.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentService } from './services/appointment.service';
 import { PlaygroundPageComponent } from './pages/playground-page/playground-page.component';
@@ -29,6 +29,7 @@ import { AppointmentDetailsPageComponent } from './pages/appointment-details-pag
     CommonModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [AppointmentService],
   bootstrap: [AppComponent],
