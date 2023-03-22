@@ -11,7 +11,7 @@ import { Appointment } from 'src/domain/appointment';
 export class EventListComponent implements OnInit, OnDestroy {
   eventData: Appointment[] | undefined;
   appointmentListSubscription?: Subscription;
-  constructor(private appointmentService: AppointmentService) {}
+  constructor(protected appointmentService: AppointmentService) {}
 
   ngOnDestroy(): void {
     // nur notwendig, wenn eine subscription offen bleibt, bei pipe(take(1)) oder einem http get ist das nicht unbedingt notwendig

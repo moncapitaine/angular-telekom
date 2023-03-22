@@ -39,7 +39,6 @@ export class AppointmentService {
     this.http
       .delete(`http://localhost:4000/appointments/${id}`)
       .subscribe((data) => {
-        console.log('deleted', data);
         this.refreshListData();
       });
   }
@@ -70,7 +69,6 @@ export class AppointmentService {
         )
       )
       .subscribe((data) => {
-        console.log(data);
         this.appointListSubject$.next(data);
       });
   }

@@ -9,6 +9,8 @@ import { CreateAppointmentPageComponent } from './pages/create-appointment-page/
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AppointmentService } from './services/appointment.service';
+import { PlaygroundPageComponent } from './pages/playground-page/playground-page.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     TelekomDatePipe,
     MonthNavigatorComponent,
     CreateAppointmentPageComponent,
+    PlaygroundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AppointmentService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
