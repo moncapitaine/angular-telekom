@@ -6,10 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { filter, map, of, Subscription, switchMap } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PlaygroundService } from 'src/app/services/playground.service';
 import { createFutureDateValidator } from 'src/app/validators/createFutureDateValidator';
+import { Appointment } from 'src/domain/appointment';
 
 @Component({
   selector: 'app-appointment-details-page',
@@ -43,14 +44,24 @@ export class AppointmentDetailsPageComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
-    this.paramsSubscription = this.activedRoute.params.subscribe((p) => {
-      const id = p['appointmentId'] ?? '';
-      this.appointmentService.appointmentList$.subscribe((list) => {
-        const foundAppointment = list?.find((item) => item.id === id);
-        // @ts-ignore
-        this.meineFormGruppe.patchValue(foundAppointment);
+    this.paramsSubscription = this.activedRoute.params
+      .pipe(map((p) => p['appointmentId'] as string | undefined | null))
+      .pipe(filter((appointmentId) => !!appointmentId))
+      .pipe(
+        switchMap((appointmentId) =>
+          this.appointmentService.appointmentList$.pipe(
+            map((list) => list?.find((item) => item.id === appointmentId))
+          )
+        )
+      )
+      .pipe(filter((appointment) => !!appointment))
+      .subscribe({
+        next: (foundAppointment) => {
+          this.meineFormGruppe.patchValue(foundAppointment as Appointment);
+        },
+        error: (err) => console.error(err),
+        complete: () => console.log('subscription completed'),
       });
-    });
   }
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
