@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PlaygroundService } from 'src/app/services/playground.service';
+import { PlaygroundService } from '../../services/playground.service';
 
 @Component({
   selector: 'app-playground-page',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AppointmentService } from 'src/app/services/appointment.service';
-import { Appointment } from 'src/domain/appointment';
+import { AppointmentService } from '../../services/appointment.service';
+import { Appointment } from '../../../domain/appointment';
 
 @Component({
   selector: 'app-create-appointment-page',

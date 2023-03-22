@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, take } from 'rxjs';
-import { AppointmentService } from 'src/app/services/appointment.service';
-import { Appointment } from 'src/domain/appointment';
+import { AppointmentService } from '../../services/appointment.service';
+import { Appointment } from '../../../domain/appointment';
 
 @Component({
   selector: 'app-event-list',

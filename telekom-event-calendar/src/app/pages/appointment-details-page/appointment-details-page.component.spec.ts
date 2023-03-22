@@ -1,23 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { render, screen } from '@testing-library/angular';
+import { testModule } from '../../test.module';
 import { AppointmentDetailsPageComponent } from './appointment-details-page.component';
 
-describe('AppointmentDetailsPageComponent', () => {
-  let component: AppointmentDetailsPageComponent;
-  let fixture: ComponentFixture<AppointmentDetailsPageComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AppointmentDetailsPageComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(AppointmentDetailsPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+describe('the details page...', () => {
+  it('should render', async () => {
+    await render(AppointmentDetailsPageComponent, { ...testModule });
+    screen.logTestingPlaygroundURL();
   });
 });

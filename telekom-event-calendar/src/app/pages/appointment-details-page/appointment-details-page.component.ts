@@ -15,10 +15,10 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, of, Subscription, switchMap } from 'rxjs';
-import { AppointmentService } from 'src/app/services/appointment.service';
-import { PlaygroundService } from 'src/app/services/playground.service';
-import { createFutureDateValidator } from 'src/app/validators/createFutureDateValidator';
-import { Appointment } from 'src/domain/appointment';
+import { AppointmentService } from '../../services/appointment.service';
+import { PlaygroundService } from '../../services/playground.service';
+import { createFutureDateValidator } from '../../validators/createFutureDateValidator';
+import { Appointment } from '../../../domain/appointment';
 
 @Component({
   selector: 'app-appointment-details-page',
