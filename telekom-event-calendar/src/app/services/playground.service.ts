@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PlaygroundService {
-  constructor() {}
+  constructor() {
+    console.log('pg service', document.location.pathname);
+  }
 
   private testVariable = 'Hallo';
 
