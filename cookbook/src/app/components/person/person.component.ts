@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./person.component.css']
 })
 export class PersonComponent {
-  @Input() personName: string | undefined;
+  @Input() personName!: string;
   @Input() details: string[] | undefined;
 
   handleClick(event: Event) {
