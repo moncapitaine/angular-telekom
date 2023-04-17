@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class PersonComponent {
   @Input() personName: string | undefined;
+  @Input() details: string[] | undefined;
 }
