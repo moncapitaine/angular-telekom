@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { MichaelComponent } from './michael.component'
+import { DeleteButtonComponent } from './delete-button.component'
 
-describe('MichaelComponent', () => {
-  let component: MichaelComponent
-  let fixture: ComponentFixture<MichaelComponent>
+describe('DeleteButtonComponent', () => {
+  let component: DeleteButtonComponent
+  let fixture: ComponentFixture<DeleteButtonComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MichaelComponent],
+      declarations: [DeleteButtonComponent],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(MichaelComponent)
+    fixture = TestBed.createComponent(DeleteButtonComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

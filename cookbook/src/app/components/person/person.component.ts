@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  styleUrls: ['./person.component.css'],
 })
 export class PersonComponent {
-  @Input() personName!: string;
-  @Input() details: string[] | undefined;
+  @Input() personName!: string
+  @Input() details: string[] | undefined
 
   removeDetail(index: number) {
     this.details?.splice(index, 1)
