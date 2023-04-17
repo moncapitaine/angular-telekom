@@ -1,10 +1,5 @@
 import { Component } from '@angular/core'
-
-
-interface Recipe {
-  id: number
-  name: string
-}
+import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 
 @Component({
   selector: 'app-recipes-page',
@@ -13,17 +8,7 @@ interface Recipe {
 })
 export class RecipesPageComponent {
   recipes: Recipe[]
-  constructor() {
-    this.recipes = [
-      {
-        id: 100,
-        name: 'Schnitzel mit Pommes'
-      },
-      {
-        id: 101,
-        name: 'Knödel mit Kraut'
-      },
-      
-    ]
+  constructor(recipesService: RecipesService) {
+    this.recipes = recipesService.getAll()
   }
 }

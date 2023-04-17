@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Recipe, RecipesService } from 'src/app/services/recipes.service';
 
 @Component({
   selector: 'app-recipe-details-page',
@@ -7,10 +8,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipe-details-page.component.css']
 })
 export class RecipeDetailsPageComponent {
-
-  id: number
-  constructor(route: ActivatedRoute) {
-    console.log(route.snapshot.params)
-    this.id = route.snapshot.params['id']
+  recipe: Recipe | undefined
+  constructor(route: ActivatedRoute, recipesService: RecipesService) {
+    const id = +route.snapshot.params['id']
+    this.recipe = recipesService.getById(id)
   }
 }
