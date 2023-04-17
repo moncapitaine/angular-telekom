@@ -10,6 +10,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component'
 import { ImpressPageComponent } from './pages/impress-page/impress-page.component'
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component'
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component'
+import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MainNavigationComponent } from './components/main-navigation/main-navig
     ImpressPageComponent,
     NotFoundPageComponent,
     MainNavigationComponent,
+    RecipesPageComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
