@@ -3,12 +3,17 @@ import { Routes, RouterModule } from '@angular/router' // CLI imports router
 import { HomePageComponent } from './pages/home-page/home-page.component'
 import { ImpressPageComponent } from './pages/impress-page/impress-page.component'
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component'
+import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-details-page.component'
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component'
 
 const routes: Routes = [
   {
     path: 'rezepte',
     component: RecipesPageComponent,
+  },
+  {
+    path: 'rezepte/:id',
+    component: RecipeDetailsPageComponent,
   },
   {
     path: 'impressum',
