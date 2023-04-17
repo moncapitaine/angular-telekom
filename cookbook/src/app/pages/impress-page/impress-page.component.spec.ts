@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ImpressPageComponent } from './impress-page.component';
+import { ImpressPageComponent } from './impress-page.component'
 
 describe('ImpressPageComponent', () => {
-  let component: ImpressPageComponent;
-  let fixture: ComponentFixture<ImpressPageComponent>;
+  let component: ImpressPageComponent
+  let fixture: ComponentFixture<ImpressPageComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImpressPageComponent ]
-    })
-    .compileComponents();
+      declarations: [ImpressPageComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(ImpressPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ImpressPageComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
