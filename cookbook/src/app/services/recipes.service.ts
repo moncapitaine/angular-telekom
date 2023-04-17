@@ -30,4 +30,8 @@ export class RecipesService {
   getById(id: number): Recipe | undefined {
     return testRecipes.find(recipe => recipe.id === id)
   }
+
+  search(test: string): Recipe[] {
+    return testRecipes.filter(recipe => recipe.name.toLowerCase().includes(test.toLowerCase()))
+  }
 }
