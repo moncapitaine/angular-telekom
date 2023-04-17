@@ -9,6 +9,10 @@ export class PersonComponent {
   @Input() personName!: string;
   @Input() details: string[] | undefined;
 
+  removeDetail(index: number) {
+    this.details?.splice(index, 1)
+  }
+
   handleClick(event: Event) {
     console.log('hallo', event)
     this.details?.push('neuer Eintrag')
