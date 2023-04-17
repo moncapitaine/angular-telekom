@@ -1,6 +1,9 @@
 <p>person works!</p>
 <h2>{{personName}}</h2>
 <ul *ngIf="details">
-  <li *ngFor="let detail of details">{{detail}}</li>
+  <li *ngFor="let detail of details" style="display: flex; gap: 1em;">
+    <button>Loeschen</button>
+    <span>{{detail}}</span>
+  </li>
 </ul>
 <button (click)="handleClick($event)">Hinzufügen</button>
