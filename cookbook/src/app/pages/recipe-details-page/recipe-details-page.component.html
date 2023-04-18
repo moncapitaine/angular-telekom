@@ -41,17 +41,27 @@
     <textarea formControlName="instructions"></textarea>
   </label>
 
-  <fieldset>
+  <fieldset formArrayName="ingredients">
     <legend>Zutaten</legend>
-    <div *ngFor="let ingredient of ingredients.controls; let i = index">
-      <label>
-        <span>Name</span>
-        <input type="text" [formControlName]="'ingredients.' + i + '.name'" />
-      </label>
-      <label>
-        <span>Menge</span>
-        <input type="text" [formControlName]="'ingredients.' + i + '.amount'" />
-      </label>
-    </div>
+    <scale-button type="button" (click)="handleAddIngredient()"
+      >Neue</scale-button
+    >
+    <ng-container
+      *ngFor="let ingredientForm of ingredients.controls; let i = index"
+    >
+      <div [formGroupName]="i">
+        <label>
+          <span>Name</span>
+          <input type="text" formControlName="name" />
+        </label>
+        <label>
+          <span>Menge</span>
+          <input type="text" formControlName="amount" />
+        </label>
+        <scale-button type="button" (click)="handleRemoveIngredient(i)"
+          >Entfernen</scale-button
+        >
+      </div>
+    </ng-container>
   </fieldset>
 </form>

@@ -19,19 +19,34 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription | undefined
   formStatusSubscription: Subscription | undefined
   
-  constructor(private route: ActivatedRoute, private router: Router, private recipesService: RecipesService, formBuilder: FormBuilder) {    
+  constructor(private route: ActivatedRoute, private router: Router, private recipesService: RecipesService, private formBuilder: FormBuilder) {    
     this.recipeFormGroup = formBuilder.group({
       id: [''],
       name: ['', [Validators.required, Validators.minLength(3)] ],
       instructions: [''],
-      ingredients: formBuilder.array([{
-        name: [''],
-        amount: ['']
-      }])
+      ingredients: formBuilder.array([
+        formBuilder.group({
+          name: ['', [Validators.required]],
+          amount: ['']
+        })
+      ])
     })
   }
   get ingredients() {
     return this.recipeFormGroup.get('ingredients') as FormArray
+  }
+
+  handleAddIngredient() {
+    this.ingredients.controls.push(
+      this.formBuilder.group({
+        name: ['', [Validators.required]],
+        amount: ['']
+      })
+    )
+  }
+
+  handleRemoveIngredient(i: number) {
+    this.ingredients.controls.splice(i, 1)
   }
 
   ngOnInit(): void {
