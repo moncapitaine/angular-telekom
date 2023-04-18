@@ -40,4 +40,18 @@
     <span>Anweisungen</span>
     <textarea formControlName="instructions"></textarea>
   </label>
+
+  <fieldset>
+    <legend>Zutaten</legend>
+    <div *ngFor="let ingredient of ingredients.controls; let i = index">
+      <label>
+        <span>Name</span>
+        <input type="text" [formControlName]="'ingredients.' + i + '.name'" />
+      </label>
+      <label>
+        <span>Menge</span>
+        <input type="text" [formControlName]="'ingredients.' + i + '.amount'" />
+      </label>
+    </div>
+  </fieldset>
 </form>

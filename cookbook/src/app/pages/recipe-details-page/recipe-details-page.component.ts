@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe, RecipesService } from 'src/app/services/recipes.service';
@@ -14,7 +14,7 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   saveDisabled = true
   recipe: Recipe | undefined
   recipeFormGroup: FormGroup
-  
+
   queryParamsSubscription: Subscription | undefined
   paramsSubscription: Subscription | undefined
   formStatusSubscription: Subscription | undefined
@@ -23,9 +23,17 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
     this.recipeFormGroup = formBuilder.group({
       id: [''],
       name: ['', [Validators.required, Validators.minLength(3)] ],
-      instructions: ['']
+      instructions: [''],
+      ingredients: formBuilder.array([{
+        name: [''],
+        amount: ['']
+      }])
     })
   }
+  get ingredients() {
+    return this.recipeFormGroup.get('ingredients') as FormArray
+  }
+
   ngOnInit(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       this.editMode = Object.keys(queryParams).findIndex(param => param === 'editmode') > -1

@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 
+export interface Ingredient {
+  name: string
+  amount?: string
+}
+
 export interface Recipe {
   id: number
   name: string
   instructions?: string
+  ingredients?: Ingredient[]
 }
 
 const testRecipes = [
