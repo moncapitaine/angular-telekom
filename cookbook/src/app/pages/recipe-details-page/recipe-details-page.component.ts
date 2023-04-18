@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe, RecipesService } from 'src/app/services/recipes.service';
@@ -11,15 +11,18 @@ import { Recipe, RecipesService } from 'src/app/services/recipes.service';
 })
 export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   editMode = false
+  saveDisabled = true
   recipe: Recipe | undefined
   recipeFormGroup: FormGroup
+  
   queryParamsSubscription: Subscription | undefined
   paramsSubscription: Subscription | undefined
+  formStatusSubscription: Subscription | undefined
   
   constructor(private route: ActivatedRoute, private router: Router, private recipesService: RecipesService, formBuilder: FormBuilder) {    
     this.recipeFormGroup = formBuilder.group({
       id: [''],
-      name: [''],
+      name: ['', [Validators.required, Validators.minLength(3)] ],
       instructions: ['']
     })
   }
@@ -32,10 +35,14 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
       this.recipe = this.recipesService.getById(id)
       this.recipeFormGroup.patchValue(this.recipe || {})
     })
+    this.formStatusSubscription = this.recipeFormGroup.statusChanges.subscribe(status => {
+      this.saveDisabled = status !== 'VALID'
+    })
   }
   ngOnDestroy(): void {
     this.queryParamsSubscription?.unsubscribe()
     this.paramsSubscription?.unsubscribe()
+    this.formStatusSubscription?.unsubscribe()
   }
 
   handleEditClick() {

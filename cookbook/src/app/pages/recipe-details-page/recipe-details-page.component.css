@@ -19,3 +19,7 @@ form input[readonly] {
   color: #444444;
   background-color: #eeeeee;
 }
+
+form label span.error {
+  color: red;
+}

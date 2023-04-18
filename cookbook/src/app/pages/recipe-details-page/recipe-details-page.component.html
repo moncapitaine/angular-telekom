@@ -2,7 +2,10 @@
   <scale-button *ngIf="!editMode" (click)="handleEditClick()"
     >Editieren</scale-button
   >
-  <scale-button *ngIf="editMode" (click)="handleSaveClick()"
+  <scale-button
+    *ngIf="editMode"
+    (click)="handleSaveClick()"
+    [disabled]="saveDisabled"
     >Speichern</scale-button
   >
   <scale-button (click)="handleNext()">Nächstes Rezept</scale-button>
@@ -22,6 +25,16 @@
   <label>
     <span>Name</span>
     <input formControlName="name" />
+    <span
+      class="error"
+      *ngIf="recipeFormGroup.get('name')?.errors?.['minlength']"
+      >Muss mindestens 3 Zeichen lang sein</span
+    >
+    <span
+      class="error"
+      *ngIf="recipeFormGroup.get('name')?.errors?.['required']"
+      >Muss mindestens angegeben werden</span
+    >
   </label>
   <label>
     <span>Anweisungen</span>
