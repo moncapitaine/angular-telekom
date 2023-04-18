@@ -47,4 +47,10 @@ export class RecipeDetailsPageComponent implements OnDestroy {
     this.recipe = this.recipeFormGroup.value
     this.router.navigateByUrl(`rezepte/${this.recipeFormGroup.value.id}`)
   }
+  handleNext() {
+    if (this.recipe) {
+      const nextId = this.recipesService.nextId(this.recipe)
+      this.router.navigateByUrl(`rezepte/${nextId}`)
+    }
+  }
 }

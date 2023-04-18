@@ -1,10 +1,11 @@
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; justify-content: space-between;">
   <scale-button *ngIf="!editMode" (click)="handleEditClick()"
     >Editieren</scale-button
   >
   <scale-button *ngIf="editMode" (click)="handleSaveClick()"
     >Speichern</scale-button
   >
+  <scale-button (click)="handleNext()">Nächstes Rezept</scale-button>
 </div>
 <h2>Details zum Rezept {{ recipe?.id }}: {{ recipe?.name }}</h2>
 <div *ngIf="!editMode">

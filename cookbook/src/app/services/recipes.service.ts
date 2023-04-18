@@ -49,4 +49,13 @@ export class RecipesService {
     }
     testRecipes[foundIndex] = changedRecipe
   }
+  nextId(recipe: Recipe) {
+    const foundIndex = testRecipes.findIndex(r => r.id === recipe.id)
+
+    if(foundIndex < testRecipes.length-1) {
+      return testRecipes[foundIndex + 1].id
+    }
+    return testRecipes[0].id
+
+  }
 }
