@@ -34,4 +34,9 @@ export class RecipesService {
   search(test: string): Recipe[] {
     return testRecipes.filter(recipe => recipe.name.toLowerCase().includes(test.toLowerCase()))
   }
+
+  add(recipe: Omit<Recipe, 'id'>) {
+    // todo: maximum von id aus dem array plus 1
+    testRecipes.push({...recipe, id: 1000})
+  }
 }
