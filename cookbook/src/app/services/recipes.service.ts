@@ -40,4 +40,13 @@ export class RecipesService {
     // todo: maximum von id aus dem array plus 1
     testRecipes.push({...recipe, id: 1000})
   }
+
+  save(changedRecipe: Recipe) {
+    const foundIndex = testRecipes.findIndex(recipe => recipe.id === changedRecipe.id)
+    if (foundIndex < 0) {
+      console.error('cannot save recipe', changedRecipe)
+      return
+    }
+    testRecipes[foundIndex] = changedRecipe
+  }
 }

@@ -13,7 +13,7 @@ import { MainNavigationComponent } from './components/main-navigation/main-navig
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-details-page.component';
 import { RecipeNewPageComponent } from './pages/recipe-new-page/recipe-new-page.component'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms'
     RecipeDetailsPageComponent,
     RecipeNewPageComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
