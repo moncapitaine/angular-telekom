@@ -1,7 +1,7 @@
-<form (ngSubmit)="handleSubmit($event)">
+<form>
   <label>
     <span>Name</span>
-    <input type="text" />
+    <input type="text" [(ngModel)]="neuesRezept.name" name="name" />
   </label>
 
   <label>

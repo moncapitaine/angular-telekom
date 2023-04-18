@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RecipesService } from 'src/app/services/recipes.service';
+import { Recipe, RecipesService } from 'src/app/services/recipes.service';
 
 @Component({
   selector: 'app-recipe-new-page',
@@ -8,24 +8,19 @@ import { RecipesService } from 'src/app/services/recipes.service';
   styleUrls: ['./recipe-new-page.component.css']
 })
 export class RecipeNewPageComponent {
+
+  neuesRezept: Omit<Recipe, 'id'>
+
   constructor(private router: Router, private recipesService: RecipesService) {
+    this.neuesRezept = {name:''}
   }
 
-  handleSubmit(event: Event) {
-    event.preventDefault()
-  }
-
-  handleSave(){
-    this.recipesService.add({
-      name: 'xyz'
-    })
-     this.router.navigateByUrl('/rezepte')
-
+  handleSave() {
+    this.recipesService.add(this.neuesRezept)
+    this.router.navigateByUrl('/rezepte')
   }
 
  handleCancel() {
-
-    // TODO: Fix double redirect bug
      this.router.navigateByUrl('/rezepte')
   }
 }
