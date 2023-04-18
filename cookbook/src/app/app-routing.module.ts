@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router' // CLI imports router
 import { HomePageComponent } from './pages/home-page/home-page.component'
 import { ImpressPageComponent } from './pages/impress-page/impress-page.component'
@@ -34,5 +34,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppRoutingModule {}
