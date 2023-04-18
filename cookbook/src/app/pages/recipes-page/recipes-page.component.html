@@ -1,7 +1,11 @@
-<p>recipes-list works!</p>
-<input type="text" (keyup)="handleChange($event)" />
-<ul *ngFor="let recipe of recipes; index as i">
-  <li>
-    <a routerLink="{{ recipe.id }}">{{ recipe.name }}</a>
-  </li>
-</ul>
+<div style="display: flex; flex-direction: column; gap: 1em;">
+  <scale-button (click)="handleNewClick()">Neues Rezept</scale-button>
+  <div>
+    <input placeholder="Filter" type="text" (keyup)="handleChange($event)" />
+    <ul *ngFor="let recipe of recipes; index as i">
+      <li>
+        <a routerLink="{{ recipe.id }}">{{ recipe.name }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

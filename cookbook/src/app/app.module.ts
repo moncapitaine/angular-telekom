@@ -11,7 +11,8 @@ import { ImpressPageComponent } from './pages/impress-page/impress-page.componen
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component'
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component'
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
-import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-details-page.component'
+import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-details-page.component';
+import { RecipeNewPageComponent } from './pages/recipe-new-page/recipe-new-page.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-d
     NotFoundPageComponent,
     MainNavigationComponent,
     RecipesPageComponent,
-    RecipeDetailsPageComponent
+    RecipeDetailsPageComponent,
+    RecipeNewPageComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

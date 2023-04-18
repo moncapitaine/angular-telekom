@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 
 @Component({
@@ -8,8 +9,13 @@ import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 })
 export class RecipesPageComponent {
   recipes: Recipe[]
-  constructor(private recipesService: RecipesService) {
+  constructor(private router: Router, private recipesService: RecipesService) {
     this.recipes = recipesService.getAll()
+  }
+
+  handleNewClick() {
+    this.router.navigateByUrl('rezepte/neu')
+    // dont do: location.pathname = '/rezepte/neu'
   }
 
   handleChange(event: Event) {
