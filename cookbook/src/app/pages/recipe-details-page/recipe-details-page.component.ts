@@ -14,22 +14,29 @@ export class RecipeDetailsPageComponent implements OnDestroy {
   recipe: Recipe | undefined
   recipeFormGroup: FormGroup
   queryParamsSubscription: Subscription
+  paramsSubscription: Subscription
   
   constructor(route: ActivatedRoute, private router: Router, private recipesService: RecipesService, formBuilder: FormBuilder) {    
+    this.recipeFormGroup = formBuilder.group({
+      id: [''],
+      name: [''],
+      instructions: ['']
+    })
+
     this.queryParamsSubscription = route.queryParams.subscribe(queryParams => {
       this.editMode = Object.keys(queryParams).findIndex(param => param === 'editmode') > -1
     })
-    
-    const id = +route.snapshot.params['id']
-    this.recipe = recipesService.getById(id)
-    this.recipeFormGroup = formBuilder.group({
-      id: [id],
-      name: [this.recipe?.name],
-      instructions: [this.recipe?.instructions]
+    this.paramsSubscription = route.params.subscribe(params => {
+      const id = +params['id']
+      this.recipe = recipesService.getById(id)
+      this.recipeFormGroup.patchValue(this.recipe || {})
     })
+    
+
   }
   ngOnDestroy(): void {
     this.queryParamsSubscription.unsubscribe()
+    this.paramsSubscription.unsubscribe()
   }
 
   handleEditClick() {
