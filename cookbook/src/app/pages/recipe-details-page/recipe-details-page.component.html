@@ -1,2 +1,6 @@
 <p>recipe-details-page works!</p>
 <h2>Details zum Rezept {{ recipe?.id }}: {{ recipe?.name }}</h2>
+<h3>Anweisungen</h3>
+<div *ngIf="recipe?.instructions">
+  {{ recipe?.instructions }}
+</div>

@@ -6,13 +6,16 @@
 
   <label>
     <span>Anleitung</span>
-    <textarea></textarea>
+    <textarea
+      [(ngModel)]="neuesRezept.instructions"
+      name="instructions"
+    ></textarea>
   </label>
 
   <div>
     <scale-button type="button" (click)="handleSave()">Speichern</scale-button>
-    <scale-button type="button" (click)="handleCancel()"
-      >Abbrechen</scale-button
+    <scale-button type="button" (click)="handleCancel()">
+      Abbrechen</scale-button
     >
   </div>
 </form>

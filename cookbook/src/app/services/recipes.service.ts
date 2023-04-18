@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 export interface Recipe {
   id: number
   name: string
+  instructions?: string
 }
 
 const testRecipes = [
