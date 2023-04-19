@@ -52,11 +52,19 @@
       <div [formGroupName]="i">
         <label>
           <span>Name</span>
-          <input type="text" formControlName="name" />
+          <input
+            [id]="'ingredients.' + i + '.name'"
+            type="text"
+            formControlName="name"
+          />
         </label>
         <label>
           <span>Menge</span>
-          <input type="text" formControlName="amount" />
+          <input
+            [id]="'ingredients.' + i + '.amount'"
+            type="text"
+            formControlName="amount"
+          />
         </label>
         <scale-button type="button" (click)="handleRemoveIngredient(i)"
           >Entfernen</scale-button

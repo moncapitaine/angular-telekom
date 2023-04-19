@@ -24,12 +24,7 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
       id: [''],
       name: ['', [Validators.required, Validators.minLength(3)] ],
       instructions: [''],
-      ingredients: formBuilder.array([
-        formBuilder.group({
-          name: ['', [Validators.required]],
-          amount: ['']
-        })
-      ])
+      ingredients: formBuilder.array([])
     })
   }
   get ingredients() {
@@ -37,7 +32,7 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   handleAddIngredient() {
-    this.ingredients.controls.push(
+    this.ingredients.push(
       this.formBuilder.group({
         name: ['', [Validators.required]],
         amount: ['']
@@ -74,6 +69,7 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   handleSaveClick() {
     this.recipesService.save(this.recipeFormGroup.value)
     this.recipe = this.recipeFormGroup.value
+    console.log(this.recipe)
     this.router.navigateByUrl(`rezepte/${this.recipeFormGroup.value.id}`)
   }
   handleNext() {
