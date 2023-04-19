@@ -10,7 +10,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('Welcome to the cookbook Rest API')
 })
 
 app.get('/recipes', (req, res) => {
@@ -50,4 +50,4 @@ app.delete('/recipes/:id', (req, res) => {
   }
 })
 
-app.listen(PORT, () => console.log(`Server is running on ${PORT}`))
+app.listen(PORT, () => console.log(`Cookbook API server is running on ${PORT}`))

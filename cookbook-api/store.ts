@@ -13,12 +13,12 @@ export interface Recipe {
 let recipes: Recipe[] = [
   {
     id: 1,
-    name: 'Erstes Event aus dem Service',
+    name: 'Leckeres Dal',
     instructions: 'bla bla',
   },
   {
     id: 2,
-    name: 'Zweiter Event aus dem Service',
+    name: 'Fischstäbchen',
   },
 ]
 
