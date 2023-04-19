@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
+import { Subscription } from 'rxjs'
 import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 
 @Component({
@@ -7,10 +8,19 @@ import { Recipe, RecipesService } from 'src/app/services/recipes.service'
   templateUrl: './recipes-page.component.html',
   styleUrls: ['./recipes-page.component.css'],
 })
-export class RecipesPageComponent {
-  recipes: Recipe[]
+export class RecipesPageComponent implements OnDestroy {
+  recipes: Recipe[] = []
+  recipesServiceSubscription: Subscription
   constructor(private router: Router, private recipesService: RecipesService) {
-    this.recipes = recipesService.getAll()
+    // this.recipes = recipesService.getAll()
+    this.recipesServiceSubscription = recipesService.getAllObservable().subscribe({
+      next: (list) => this.recipes = list,
+      error: (err) => console.error(err),
+      complete: () => console.log('recipes observable completed!')
+    })
+  }
+  ngOnDestroy(): void {
+    this.recipesServiceSubscription.unsubscribe()
   }
 
   handleNewClick() {

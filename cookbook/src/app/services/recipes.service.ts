@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Ingredient {
   name: string
@@ -28,10 +30,14 @@ const testRecipes = [
 })
 export class RecipesService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getAll(): Recipe[] {
     return testRecipes
+  }
+
+  getAllObservable(): Observable<Recipe[]> {
+    return this.httpClient.get<Recipe[]>('http://localhost:4000/recipes')
   }
 
   getById(id: number): Recipe | undefined {

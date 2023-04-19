@@ -14,6 +14,7 @@ import { RecipesPageComponent } from './pages/recipes-page/recipes-page.componen
 import { RecipeDetailsPageComponent } from './pages/recipe-details-page/recipe-details-page.component';
 import { RecipeNewPageComponent } from './pages/recipe-new-page/recipe-new-page.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     RecipeDetailsPageComponent,
     RecipeNewPageComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
