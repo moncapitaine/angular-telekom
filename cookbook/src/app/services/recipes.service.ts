@@ -63,6 +63,10 @@ export class RecipesService {
     return testRecipes.find(recipe => recipe.id === id)
   }
 
+  getById$(id: number): Observable<Recipe | undefined> {
+    return this.httpClient.get<Recipe | undefined>(`http://localhost:4000/recipes/${id}`)
+  }
+
   search(test: string): Recipe[] {
     return testRecipes.filter(recipe => recipe.name.toLowerCase().includes(test.toLowerCase()))
   }

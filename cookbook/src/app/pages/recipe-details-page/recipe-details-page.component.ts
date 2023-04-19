@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Recipe, RecipesService } from 'src/app/services/recipes.service';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Subscription, switchMap } from 'rxjs'
+import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 
 @Component({
   selector: 'app-recipe-details-page',
   templateUrl: './recipe-details-page.component.html',
-  styleUrls: ['./recipe-details-page.component.css']
+  styleUrls: ['./recipe-details-page.component.css'],
 })
 export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   editMode = false
@@ -18,13 +18,18 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   queryParamsSubscription: Subscription | undefined
   paramsSubscription: Subscription | undefined
   formStatusSubscription: Subscription | undefined
-  
-  constructor(private route: ActivatedRoute, private router: Router, private recipesService: RecipesService, private formBuilder: FormBuilder) {    
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private recipesService: RecipesService,
+    private formBuilder: FormBuilder
+  ) {
     this.recipeFormGroup = formBuilder.group({
       id: [''],
-      name: ['', [Validators.required, Validators.minLength(3)] ],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       instructions: [''],
-      ingredients: formBuilder.array([])
+      ingredients: formBuilder.array([]),
     })
   }
   get ingredients() {
@@ -35,23 +40,34 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
     this.ingredients.push(
       this.formBuilder.group({
         name: ['', [Validators.required]],
-        amount: ['']
+        amount: [''],
       })
     )
   }
 
   ngOnInit(): void {
-    this.queryParamsSubscription = this.route.queryParams.subscribe(queryParams => {
-      this.editMode = Object.keys(queryParams).findIndex(param => param === 'editmode') > -1
-    })
-    this.paramsSubscription = this.route.params.subscribe(params => {
-      const id = +params['id']
-      this.recipe = this.recipesService.getById(id)
-      this.recipeFormGroup.patchValue(this.recipe || {})
-    })
-    this.formStatusSubscription = this.recipeFormGroup.statusChanges.subscribe(status => {
-      this.saveDisabled = status !== 'VALID'
-    })
+    this.queryParamsSubscription = this.route.queryParams.subscribe(
+      queryParams => {
+        this.editMode =
+          Object.keys(queryParams).findIndex(param => param === 'editmode') > -1
+      }
+    )
+
+    // this.paramsSubscription = this.route.params.subscribe(params => {
+    //   const id = +params['id']
+    //   this.recipe = this.recipesService.getById(id)
+    //   this.recipeFormGroup.patchValue(this.recipe || {})
+    // })
+
+    this.paramsSubscription = this.route.params
+      .pipe(switchMap(params => this.recipesService.getById$(+params['id'])))
+      .subscribe(recipe => (this.recipe = recipe))
+
+    this.formStatusSubscription = this.recipeFormGroup.statusChanges.subscribe(
+      status => {
+        this.saveDisabled = status !== 'VALID'
+      }
+    )
   }
   ngOnDestroy(): void {
     this.queryParamsSubscription?.unsubscribe()
@@ -60,7 +76,9 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   handleEditClick() {
-    this.router.navigateByUrl(`rezepte/${this.recipeFormGroup.value.id}?editmode`)
+    this.router.navigateByUrl(
+      `rezepte/${this.recipeFormGroup.value.id}?editmode`
+    )
   }
   handleSaveClick() {
     this.recipesService.save(this.recipeFormGroup.value)
