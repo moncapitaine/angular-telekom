@@ -59,7 +59,7 @@ export class RecipesService {
           this.recipesSubject.next(list)
           this.statusSubject.next('done')
         })
-    }, 4000)
+    }, 400)
   }
 
   getById(id: number): Recipe | undefined {
@@ -81,6 +81,19 @@ export class RecipesService {
   add(recipe: Omit<Recipe, 'id'>) {
     // todo: maximum von id aus dem array plus 1
     testRecipes.push({ ...recipe, id: 1000 })
+  }
+
+  add$(recipe: Omit<Recipe, 'id'>) {
+    // todo: maximum von id aus dem array plus 1
+    return this.httpClient.post<Recipe>(
+      `http://localhost:4000/recipes`,
+      recipe,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
   }
 
   save(changedRecipe: Recipe) {
