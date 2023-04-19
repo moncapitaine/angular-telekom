@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import { addItem, Appointment, deleteIndex, getList } from './store'
+import { addItem, Recipe, deleteIndex, getList } from './store'
 
 const PORT = 4000
 const app = express()
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-app.get('/appointments', (req, res) => {
+app.get('/recipes', (req, res) => {
   res.send(getList())
 })
 

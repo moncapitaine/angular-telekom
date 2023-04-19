@@ -16,6 +16,15 @@
   <div *ngIf="recipe?.instructions">
     {{ recipe?.instructions }}
   </div>
+
+  <ul *ngIf="recipe && recipe?.ingredients">
+    <li *ngFor="let ingredient of recipe.ingredients">
+      <div>
+        <span>{{ ingredient.name }}</span>
+        <span>{{ ingredient.amount }}</span>
+      </div>
+    </li>
+  </ul>
 </div>
 <form *ngIf="editMode" [formGroup]="recipeFormGroup">
   <label>
