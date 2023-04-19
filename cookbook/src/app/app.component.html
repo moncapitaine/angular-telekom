@@ -5,3 +5,6 @@
 <main>
   <router-outlet></router-outlet>
 </main>
+<footer>
+  {{ (recipesService.recipes$ | async)?.length }} Rezepte im Backend
+</footer>
