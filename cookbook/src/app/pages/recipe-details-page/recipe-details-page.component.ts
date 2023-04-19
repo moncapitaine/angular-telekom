@@ -61,7 +61,10 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
 
     this.paramsSubscription = this.route.params
       .pipe(switchMap(params => this.recipesService.getById$(+params['id'])))
-      .subscribe(recipe => (this.recipe = recipe))
+      .subscribe(recipe => {
+        this.recipe = recipe
+        this.recipeFormGroup.patchValue(this.recipe || {})
+      })
 
     this.formStatusSubscription = this.recipeFormGroup.statusChanges.subscribe(
       status => {
@@ -81,7 +84,9 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
     )
   }
   handleSaveClick() {
-    this.recipesService.save(this.recipeFormGroup.value)
+    this.recipesService
+      .saveOnBackend$(this.recipeFormGroup.value)
+      .subscribe(result => console.log(result))
     this.recipe = this.recipeFormGroup.value
     console.log(this.recipe)
     this.router.navigateByUrl(`rezepte/${this.recipeFormGroup.value.id}`)

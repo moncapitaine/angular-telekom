@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 export interface Ingredient {
   name: string
@@ -17,20 +17,21 @@ export interface Recipe {
 const testRecipes = [
   {
     id: 100,
-    name: 'Schnitzel mit Pommes'
+    name: 'Schnitzel mit Pommes',
   },
   {
     id: 101,
-    name: 'Knödel mit Kraut'
+    name: 'Knödel mit Kraut',
   },
 ]
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipesService {
-
-  private statusSubject = new BehaviorSubject<'refreshing' | 'done' | 'unknown'>('unknown')
+  private statusSubject = new BehaviorSubject<
+    'refreshing' | 'done' | 'unknown'
+  >('unknown')
   public status$ = this.statusSubject.asObservable()
 
   private recipesSubject = new BehaviorSubject<Recipe[]>([])
@@ -52,10 +53,12 @@ export class RecipesService {
     this.statusSubject.next('refreshing')
     this.recipesSubject.next([])
     setTimeout(() => {
-      this.httpClient.get<Recipe[]>('http://localhost:4000/recipes').subscribe((list) => {
-        this.recipesSubject.next(list)
-        this.statusSubject.next('done')
-      })
+      this.httpClient
+        .get<Recipe[]>('http://localhost:4000/recipes')
+        .subscribe(list => {
+          this.recipesSubject.next(list)
+          this.statusSubject.next('done')
+        })
     }, 4000)
   }
 
@@ -64,29 +67,46 @@ export class RecipesService {
   }
 
   getById$(id: number): Observable<Recipe | undefined> {
-    return this.httpClient.get<Recipe | undefined>(`http://localhost:4000/recipes/${id}`)
+    return this.httpClient.get<Recipe | undefined>(
+      `http://localhost:4000/recipes/${id}`
+    )
   }
 
   search(test: string): Recipe[] {
-    return testRecipes.filter(recipe => recipe.name.toLowerCase().includes(test.toLowerCase()))
+    return testRecipes.filter(recipe =>
+      recipe.name.toLowerCase().includes(test.toLowerCase())
+    )
   }
 
   add(recipe: Omit<Recipe, 'id'>) {
     // todo: maximum von id aus dem array plus 1
-    testRecipes.push({...recipe, id: 1000})
+    testRecipes.push({ ...recipe, id: 1000 })
   }
 
   save(changedRecipe: Recipe) {
-    const foundIndex = testRecipes.findIndex(recipe => recipe.id === changedRecipe.id)
+    const foundIndex = testRecipes.findIndex(
+      recipe => recipe.id === changedRecipe.id
+    )
     if (foundIndex < 0) {
       console.error('cannot save recipe', changedRecipe)
       return
     }
     testRecipes[foundIndex] = changedRecipe
   }
+  saveOnBackend$(changedRecipe: Recipe): Observable<boolean> {
+    return this.httpClient.put<boolean>(
+      `http://localhost:4000/recipes/${changedRecipe.id}`,
+      changedRecipe,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+  }
   nextId(recipe: Recipe) {
     const foundIndex = testRecipes.findIndex(r => r.id === recipe.id)
-    if(foundIndex < testRecipes.length-1) {
+    if (foundIndex < testRecipes.length - 1) {
       return testRecipes[foundIndex + 1].id
     }
     return testRecipes[0].id
