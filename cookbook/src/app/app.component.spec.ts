@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing'
 import { AppComponent } from './app.component'
+import testBedConfiguration from './testBedConfiguration'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-    }).compileComponents()
+    await TestBed.configureTestingModule(
+      testBedConfiguration
+    ).compileComponents()
   })
 
   it('should create the app', () => {
@@ -24,8 +25,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent)
     fixture.detectChanges()
     const compiled = fixture.nativeElement as HTMLElement
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'cookbook app is running!'
+    expect(compiled.querySelector('.titleCssClass')?.textContent).toContain(
+      'Hallo Kochbuch'
     )
   })
 })
