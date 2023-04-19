@@ -10,17 +10,18 @@ import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 })
 export class RecipesPageComponent implements OnDestroy {
   recipes: Recipe[] = []
-  recipesServiceSubscription: Subscription
-  constructor(private router: Router, private recipesService: RecipesService) {
+  // recipesServiceSubscription: Subscription
+  constructor(private router: Router, protected recipesService: RecipesService) {
     // this.recipes = recipesService.getAll()
-    this.recipesServiceSubscription = recipesService.getAllObservable().subscribe({
-      next: (list) => this.recipes = list,
-      error: (err) => console.error(err),
-      complete: () => console.log('recipes observable completed!')
-    })
+    // this.recipesServiceSubscription = recipesService.getAllObservable().subscribe({
+    //   next: (list) => this.recipes = list,
+    //   error: (err) => console.error(err),
+    //   complete: () => console.log('recipes observable completed!')
+    // })
   }
+
   ngOnDestroy(): void {
-    this.recipesServiceSubscription.unsubscribe()
+    // this.recipesServiceSubscription.unsubscribe()
   }
 
   handleNewClick() {

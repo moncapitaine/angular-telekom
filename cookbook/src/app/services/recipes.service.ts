@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Ingredient {
   name: string
@@ -30,7 +30,15 @@ const testRecipes = [
 })
 export class RecipesService {
 
-  constructor(private httpClient: HttpClient) { }
+  private statusSubject = new BehaviorSubject<'refreshing' | 'done' | 'unknown'>('unknown')
+  public status$ = this.statusSubject.asObservable()
+
+  private recipesSubject = new BehaviorSubject<Recipe[]>([])
+  public recipes$ = this.recipesSubject.asObservable()
+
+  constructor(private httpClient: HttpClient) {
+    this.refresh()
+  }
 
   getAll(): Recipe[] {
     return testRecipes
@@ -38,6 +46,17 @@ export class RecipesService {
 
   getAllObservable(): Observable<Recipe[]> {
     return this.httpClient.get<Recipe[]>('http://localhost:4000/recipes')
+  }
+
+  refresh() {
+    this.statusSubject.next('refreshing')
+    this.recipesSubject.next([])
+    setTimeout(() => {
+      this.httpClient.get<Recipe[]>('http://localhost:4000/recipes').subscribe((list) => {
+        this.recipesSubject.next(list)
+        this.statusSubject.next('done')
+      })
+    }, 4000)
   }
 
   getById(id: number): Recipe | undefined {
