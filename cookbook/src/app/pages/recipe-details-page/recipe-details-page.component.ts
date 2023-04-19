@@ -88,7 +88,6 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
       .saveOnBackend$(this.recipeFormGroup.value)
       .subscribe(result => console.log(result))
     this.recipe = this.recipeFormGroup.value
-    console.log(this.recipe)
     this.router.navigateByUrl(`rezepte/${this.recipeFormGroup.value.id}`)
   }
   handleNext() {
