@@ -28,8 +28,11 @@ export const deleteIndex = (index: number) => {
 
 export const getList = () => recipes
 
-export const getItem = (id: number) =>
-  recipes.find((recipe) => recipe.id === id)
+export const getItem = (id: number) => {
+  const foundItem = recipes.find((recipe) => recipe.id === id)
+  console.log(JSON.stringify(foundItem, null, 2))
+  return foundItem
+}
 
 export const addItem = (newItem: Recipe) => {
   recipes.push(newItem)

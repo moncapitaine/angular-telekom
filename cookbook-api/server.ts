@@ -39,6 +39,7 @@ app.put('/recipes/:id', (req, res) => {
   } else {
     foundItem.name = recipe.name
     foundItem.instructions = recipe.instructions
+    foundItem.ingredients = recipe?.ingredients
     res.send(true)
   }
 })

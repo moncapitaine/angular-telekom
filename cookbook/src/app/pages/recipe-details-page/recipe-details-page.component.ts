@@ -64,6 +64,15 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
       .subscribe(recipe => {
         this.recipe = recipe
         this.recipeFormGroup.patchValue(this.recipe || {})
+        this.ingredients.clear()
+        recipe?.ingredients?.forEach(ingredient => {
+          this.ingredients.push(
+            this.formBuilder.group({
+              name: [ingredient.name, [Validators.required]],
+              amount: [ingredient.amount],
+            })
+          )
+        })
       })
 
     this.formStatusSubscription = this.recipeFormGroup.statusChanges.subscribe(
