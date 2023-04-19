@@ -23,12 +23,12 @@ let recipes: Recipe[] = [
 ]
 
 export const deleteIndex = (index: number) => {
-  appointments.splice(index, 1)
+  recipes.splice(index, 1)
 }
 
-export const getList = () => appointments
+export const getList = () => recipes
 
 export const addItem = (newItem: Recipe) => {
-  appointments.push(newItem)
-  return appointments
+  recipes.push(newItem)
+  return recipes
 }

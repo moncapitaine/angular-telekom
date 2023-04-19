@@ -17,31 +17,31 @@ app.get('/recipes', (req, res) => {
   res.send(getList())
 })
 
-app.post('/appointments', (req, res) => {
-  const newAppointment = req.body
+app.post('/recipes', (req, res) => {
+  const newRecipe = req.body
   console.log(req.body)
-  newAppointment.id = (getList().length + 1).toString()
-  addItem(newAppointment)
-  res.send(newAppointment)
+  newRecipe.id = getList().length + 1
+  addItem(newRecipe)
+  res.send(newRecipe)
 })
 
-app.put('/appointments/:id', (req, res) => {
-  const appointment = req.body as Appointment
-  const appointmentId = req.params['id']
-  const foundItem = getList().find((item) => item.id === appointmentId)
+app.put('/recipes/:id', (req, res) => {
+  const recipe = req.body as Recipe
+  const recipeId = +req.params['id']
+  const foundItem = getList().find((item) => item.id === recipeId)
   if (!foundItem) {
     res.sendStatus(404)
   } else {
-    foundItem.name = appointment.name
-    foundItem.start = appointment.start
+    foundItem.name = recipe.name
+    foundItem.instructions = recipe.instructions
     res.send(true)
   }
 })
 
 // @ts-ignore
-app.delete('/appointments/:id', (req, res) => {
-  const appointmentId = req.params['id']
-  const foundIndex = getList().findIndex((item) => item.id === appointmentId)
+app.delete('/recipes/:id', (req, res) => {
+  const recipeId = +req.params['id']
+  const foundIndex = getList().findIndex((item) => item.id === recipeId)
   if (foundIndex < 0) {
     res.sendStatus(404)
   } else {

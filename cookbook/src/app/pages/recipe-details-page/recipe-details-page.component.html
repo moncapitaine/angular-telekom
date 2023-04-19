@@ -17,7 +17,7 @@
     {{ recipe?.instructions }}
   </div>
 
-  <ul *ngIf="recipe && recipe?.ingredients">
+  <ul *ngIf="recipe && recipe.ingredients">
     <li *ngFor="let ingredient of recipe.ingredients">
       <div>
         <span>{{ ingredient.name }}</span>
