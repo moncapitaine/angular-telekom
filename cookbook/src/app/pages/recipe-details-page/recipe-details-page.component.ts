@@ -40,10 +40,6 @@ export class RecipeDetailsPageComponent implements OnInit, OnDestroy {
     )
   }
 
-  handleRemoveIngredient(i: number) {
-    this.ingredients.controls.splice(i, 1)
-  }
-
   ngOnInit(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       this.editMode = Object.keys(queryParams).findIndex(param => param === 'editmode') > -1
