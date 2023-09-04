@@ -1,2 +1,18 @@
-<h2>Sonderangebot des Tages</h2>
-<p>Kaufen Sie das neueste Telefon mit Pulse Dial</p>
+<div class="presentation">
+  <h2>{{ specialOffer.title }}</h2>
+  <p>{{ specialOffer.description }}</p>
+</div>
+<div class="editor">
+  <label>
+    <span>Titel mit ngModel</span>
+    <input type="text" [(ngModel)]="specialOffer.title" />
+  </label>
+  <label>
+    <span>Titel nur Wert</span>
+    <input type="text" [value]="specialOffer.title" (input)="titleChange($event)" />
+  </label>
+  <label>
+    <span>Beschreibung</span>
+    <textarea [(ngModel)]="specialOffer.description" ></textarea>
+  </label>
+</div>

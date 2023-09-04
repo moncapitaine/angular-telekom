@@ -1,7 +1,7 @@
 <h2>Alle unsere Produkte</h2>
 <ul>
   <li *ngFor="let product of products">
-    <h3>{{ product.name }}</h3>
+    <h3>{{ product.name | uppercase }}</h3>
     <p>{{ product.description }}</p>
   </li>
 </ul>

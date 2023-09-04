@@ -1,0 +1,21 @@
+div.presentation {
+  border: solid 1px green;
+  margin: 2em;
+  padding: 1em;
+}
+
+div.editor {
+  display: flex; flex-direction: column;
+  margin: 2em;
+  padding: 1em;
+  gap: 1em;
+}
+div.editor label {
+  flex-direction: column;
+  display: flex;
+}
+
+div.editor label span {
+  display: flex;
+  font-weight: bold;
+}
