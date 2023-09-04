@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product, exampleProductList } from 'src/app/domain/products';
 
 @Component({
   selector: 'app-product-list',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
 
+  public products: Product[]
+
+  constructor() {
+    this.products = exampleProductList
+  }
 }

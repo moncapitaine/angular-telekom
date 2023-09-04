@@ -1,11 +1,7 @@
 <h2>Alle unsere Produkte</h2>
 <ul>
-  <li>
-    <h3>Siemens S10</h3>
-    <p>Das neueste ultimative mit Farbdisplay</p>
-  </li>
-  <li>
-    <h3>Nokia 7110</h3>
-    <p>Gabs bestimmt mal</p>
+  <li *ngFor="let product of products">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
   </li>
 </ul>
