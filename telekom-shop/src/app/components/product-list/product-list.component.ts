@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/domain/products';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -7,11 +7,15 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
 
-  public products: Product[]
+  public products?: Product[]
 
-  constructor(productService: ProductService) {
-    this.products = productService.getAllProducts()
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.productService.getAllProductsRohrpost().subscribe((data) => {
+      this.products = data  
+    })
   }
 }

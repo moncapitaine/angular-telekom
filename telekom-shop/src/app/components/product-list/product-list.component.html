@@ -1,5 +1,6 @@
 <h2>Alle unsere Produkte</h2>
-<ul>
+<p *ngIf="!products">Loading...</p>
+<ul *ngIf="products">
   <li *ngFor="let product of products">
     <h3>{{ product.name | uppercase }}</h3>
     <p>{{ product.description }}</p>
