@@ -4,5 +4,6 @@
   <li *ngFor="let product of products">
     <h3>{{ product.name | uppercase }}</h3>
     <p>{{ product.description }}</p>
+    <a routerLink="/product/{{product.id}}">Details</a>
   </li>
 </ul>

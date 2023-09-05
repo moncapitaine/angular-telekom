@@ -14,4 +14,8 @@ export class ProductService {
       .pipe(delay(2000))
       .pipe(tap((data) => console.log('daten nach dem Delay erkannt', data)));
   }
+
+  public getProductById(id: string) {
+    return exampleProductList.find(product => id === product.id)
+  }
 }

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
+import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainNavigationComponent } from './components/main-navigation/main-navig
     ProductListComponent,
     ShoppingCartPageComponent,
     HomePageComponent,
-    MainNavigationComponent
+    MainNavigationComponent,
+    ProductDetailsPageComponent
   ],
   imports: [
     BrowserModule,
