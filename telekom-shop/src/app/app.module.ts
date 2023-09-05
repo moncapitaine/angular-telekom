@@ -8,6 +8,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { FormsModule } from '@angular/forms';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     SpecialOffersComponent,
     ProductListComponent,
     ShoppingCartPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    MainNavigationComponent
   ],
   imports: [
     BrowserModule,
