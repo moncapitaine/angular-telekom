@@ -10,7 +10,7 @@ const productRestApiUrl = 'http://localhost:4001/products'
 export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
-  public getAllProductsRohrpost() {
+  public getAllProducts$() {
     return this.httpClient.get<Product[]>(productRestApiUrl)
       .pipe(tap((data) => console.log('products received', data)))
 

@@ -15,11 +15,10 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getAllProductsRohrpost().subscribe((data) => {
+    this.productService.getAllProducts$().subscribe((data) => {
       this.products = data  
     })
     this.loadData()
-
   }
 
   async loadData() {
