@@ -11,6 +11,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingCartPageComponent,
     HomePageComponent,
     MainNavigationComponent,
-    ProductDetailsPageComponent
+    ProductDetailsPageComponent,
+    CartSummaryComponent
   ],
   imports: [
     BrowserModule,
