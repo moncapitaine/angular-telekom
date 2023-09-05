@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Product, exampleProductList } from 'src/app/domain/products';
+import { Product } from 'src/app/domain/products';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +11,7 @@ export class ProductListComponent {
 
   public products: Product[]
 
-  constructor() {
-    this.products = exampleProductList
+  constructor(productService: ProductService) {
+    this.products = productService.getAllProducts()
   }
 }
