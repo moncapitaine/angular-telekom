@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Product, exampleProductList } from '../domain/products';
-import { Observable, delay, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 const productRestApiUrl = 'http://localhost:4001/products'
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private httpClient: HttpClient) {}
+  public currentProduct$ = new BehaviorSubject<Product | undefined>(undefined)
+  constructor(private httpClient: HttpClient) {
+  }
+
+  public setCurrentProductId(id: string) {
+    this.httpClient.get<Product>(`${productRestApiUrl}/${id}`).subscribe(data => {
+      this.currentProduct$.next(data)
+    })
+  }
 
   public getAllProducts$() {
     return this.httpClient.get<Product[]>(productRestApiUrl)
@@ -20,8 +29,8 @@ export class ProductService {
     //   .pipe(tap((data) => console.log('daten nach dem Delay erkannt', data)));
   }
 
-  public getProductById(id: string) {
-    return exampleProductList.find(product => id === product.id)
+  public getProductById$(id: string) {
+    return this.httpClient.get<Product>(`${productRestApiUrl}/${id}`)
   }
 
   public async getProductsByFetchApi() {

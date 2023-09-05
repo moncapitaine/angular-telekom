@@ -13,6 +13,16 @@ app.get('/', (req, res) => {
   res.send('Hello Telekom Shop API')
 })
 
+app.get('/products/:id', (req, res) => {
+  const itemId = req.params['id']
+  const foundItem = getList().find((item) => item.id === itemId)
+  if (!foundItem) {
+    res.sendStatus(404)
+  } else {
+    res.send(foundItem)
+  }
+})
+
 app.get('/products', (req, res) => {
   res.send(getList())
 })
@@ -25,7 +35,7 @@ app.post('/products', (req, res) => {
   res.send(newItem)
 })
 
-app.put('/appointments/:id', (req, res) => {
+app.put('/products/:id', (req, res) => {
   const item = req.body as Product
   const itemId = req.params['id']
   const foundItem = getList().find((item) => item.id === itemId)
