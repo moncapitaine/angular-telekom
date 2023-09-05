@@ -10,6 +10,7 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
