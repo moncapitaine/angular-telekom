@@ -1,15 +1,18 @@
+
 <div class="presentation">
   <h2>{{ specialOffer.title }}</h2>
   <p>{{ specialOffer.description }}</p>
 </div>
-<div class="editor">
+<button (click)="toggleEditor()">{{ editorMode ? 'Hide Editor' : 'Show editor '}}</button>
+
+<div *ngIf="editorMode" class="editor">
   <label>
     <span>Titel mit ngModel</span>
     <input type="text" [(ngModel)]="specialOffer.title" />
   </label>
   <label>
     <span>Titel nur Wert</span>
-    <input type="text" [value]="specialOffer.title" (input)="titleChange($event)" />
+    <input type="text" [value]="specialOffer.title" (change)="titleChange($event)" />
   </label>
   <label>
     <span>Beschreibung</span>

@@ -10,6 +10,7 @@ interface SpecialOffer {
   styleUrls: ['./special-offers.component.css']
 })
 export class SpecialOffersComponent {
+  public editorMode = false
   public specialOffer: SpecialOffer
   constructor() {
     this.specialOffer = {
@@ -20,5 +21,8 @@ export class SpecialOffersComponent {
   public titleChange(event: any) {
     console.log(event.target.value)
     this.specialOffer.title = event.target.value
+  }
+  public toggleEditor() {
+    this.editorMode = !this.editorMode
   }
 }
