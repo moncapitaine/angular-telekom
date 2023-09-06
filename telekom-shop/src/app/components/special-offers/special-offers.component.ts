@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
+// Example for template driven forms
 
 interface SpecialOffer {
   title: string
@@ -12,6 +14,9 @@ interface SpecialOffer {
 export class SpecialOffersComponent {
   public editorMode = false
   public specialOffer: SpecialOffer
+
+  @ViewChild('title') titleRef?: ElementRef
+
   constructor() {
     this.specialOffer = {
       title: 'Sonderangebot des Tages',
@@ -24,5 +29,14 @@ export class SpecialOffersComponent {
   }
   public toggleEditor() {
     this.editorMode = !this.editorMode
+  }
+
+  onSubmit() {
+    if(this.specialOffer.title.length < 2) {
+      alert('nix da')
+      return
+    }
+    console.log(this.titleRef)
+    console.log('saving', this.specialOffer)
   }
 }

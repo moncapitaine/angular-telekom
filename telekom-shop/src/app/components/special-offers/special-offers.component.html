@@ -5,10 +5,20 @@
 </div>
 <button (click)="toggleEditor()">{{ editorMode ? 'Hide Editor' : 'Show editor '}}</button>
 
-<div *ngIf="editorMode" class="editor">
+<form *ngIf="editorMode"  (ngSubmit)="onSubmit()" #specialOfferForm="ngForm">
+<div class="editor" class="form-group">
   <label>
     <span>Titel mit ngModel</span>
-    <input type="text" [(ngModel)]="specialOffer.title" />
+    <input type="text" required="true"
+      class="form-control"
+      [(ngModel)]="specialOffer.title"
+      name="title" id="title"
+      #title="ngModel"
+      />
+    <div [hidden]="title.valid || title.pristine"
+    class="alert alert-danger">
+ Name is required
+</div>
   </label>
   <label>
     <span>Titel nur Wert</span>
@@ -16,6 +26,7 @@
   </label>
   <label>
     <span>Beschreibung</span>
-    <textarea [(ngModel)]="specialOffer.description" ></textarea>
+    <textarea [(ngModel)]="specialOffer.description" name="description"></textarea>
   </label>
+  <scale-button type="submit">Speichern</scale-button>
 </div>

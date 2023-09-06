@@ -4,18 +4,18 @@ div.presentation {
   padding: 1em;
 }
 
-div.editor {
+form {
   display: flex; flex-direction: column;
   margin: 2em;
   padding: 1em;
   gap: 1em;
 }
-div.editor label {
+form label {
   flex-direction: column;
   display: flex;
 }
 
-div.editor label span {
+form label span {
   display: flex;
   font-weight: bold;
 }
