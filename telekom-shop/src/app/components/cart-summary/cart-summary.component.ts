@@ -11,15 +11,14 @@ export class CartSummaryComponent implements OnInit {
   itemCount: number = 0
   productCount: number = 0
 
-  constructor(private cartService: ShoppingCartService) {
+  constructor(private cartService: ShoppingCartService) {}
 
-  }
   ngOnInit(): void {
     this.cartService.currentCart$.subscribe(cart => {
-      this.itemCount = cart.map(item => item.amount).reduce((prev, curr) => prev + curr)
+      console.log('updated cart arrived in summary')
+      this.itemCount = cart.map(item => item.amount)
+        .reduce((prev, curr) => prev + curr, 0)
       this.productCount = cart.length
     })
   }
-
-  
 }

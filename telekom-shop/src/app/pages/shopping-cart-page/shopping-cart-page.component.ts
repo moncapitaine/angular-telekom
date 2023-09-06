@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CartItem, ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 export const shoppingCartPagePath = 'warenkorb'
 @Component({
@@ -6,6 +8,22 @@ export const shoppingCartPagePath = 'warenkorb'
   templateUrl: './shopping-cart-page.component.html',
   styleUrls: ['./shopping-cart-page.component.css']
 })
-export class ShoppingCartPageComponent {
+export class ShoppingCartPageComponent implements OnInit, OnDestroy {
 
+  cart?: CartItem[]
+  private cartSubscription?:Subscription
+
+  constructor(protected cartService: ShoppingCartService) {
+
+  }
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe()
+  }
+  ngOnInit(): void {
+    this.cartSubscription = this.cartService.currentCart$.subscribe(cart => this.cart = cart)
+  }
+
+  reduceItemAmount(itemIndex: number) {
+    this.cartService.reduceItemAmount(itemIndex)
+  }
 }

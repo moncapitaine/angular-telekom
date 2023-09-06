@@ -1,2 +1,11 @@
 <h2>Warenkorb</h2>
 <p>Hier sehen Sie alle Produkte die sie gleich kaufen werden...</p>
+<ul>
+  <li *ngFor="let item of cart; let i = index">
+    <scale-card>
+      <h4 style="margin: 0px 0 16px 0; font: var(--telekom-text-style-heading-4);">{{ item.name }}</h4>
+      <p>Menge: {{ item.amount }}</p>
+      <scale-button (click)="reduceItemAmount(i)">Entferne eins</scale-button>
+  </scale-card>
+  </li>
+</ul>

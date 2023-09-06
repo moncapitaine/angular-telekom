@@ -5,6 +5,12 @@ import { BehaviorSubject } from 'rxjs';
 
 export type CartItem = Product & {amount: number}
 
+const initialCart: CartItem[] = [    {
+  id: "1",
+  name: "Test Telefon",
+  amount: 2
+}]
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +19,10 @@ export class ShoppingCartService {
   private cart: CartItem[]
   private currentProduct?: Product
 
-  public currentCart$ = new BehaviorSubject<CartItem[]>([])
+  public currentCart$ = new BehaviorSubject<CartItem[]>(initialCart)
 
   constructor(private productService: ProductService) {
-    this.cart = []
+    this.cart = initialCart
     this.productService.currentProduct$.subscribe(product => {
       this.currentProduct = product
     })
@@ -32,6 +38,17 @@ export class ShoppingCartService {
       this.cart[foundIndex].amount = this.cart[foundIndex].amount + 1
     } else {
       this.cart.push({...this.currentProduct, amount: 1})
+    }
+    this.currentCart$.next([...this.cart])
+  }
+
+  reduceItemAmount(index: number) {
+    console.log(this.cart, index)
+    const item = this.cart[index]
+    if (item.amount < 2) {
+      this.cart.splice(index, 1)
+    } else {
+      item.amount = item.amount - 1
     }
     this.currentCart$.next([...this.cart])
   }
