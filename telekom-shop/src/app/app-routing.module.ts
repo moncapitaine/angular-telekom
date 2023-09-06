@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShoppingCartPageComponent, shoppingCartPagePath } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -21,6 +21,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class AppRoutingModule { }

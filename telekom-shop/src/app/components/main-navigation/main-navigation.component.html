@@ -1,6 +1,18 @@
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/warenkorb">Warenkorb</a>
-  <button (click)="pay()">Zur Kasse</button>
-  <button (click)="reloadProductList()">Produktliste neu laden</button>
-</nav>
+<scale-telekom-header>
+  <scale-telekom-nav-list slot="main-nav" aria-label="Main Navigation Links">
+    <scale-telekom-nav-item aria-label="Topic One">
+      <a routerLink="/">Home</a>
+    </scale-telekom-nav-item>
+    <scale-telekom-nav-item>
+      <a routerLink="/warenkorb">Warenkorb</a>
+    </scale-telekom-nav-item>
+    <scale-telekom-nav-item>
+      <button (click)="pay()">Zur Kasse</button>
+    </scale-telekom-nav-item>
+    <scale-telekom-nav-item>
+      <scale-button variant="secondary" (click)="reloadProductList()"
+        >Produktliste neu laden</scale-button
+      >
+    </scale-telekom-nav-item>
+  </scale-telekom-nav-list>
+</scale-telekom-header>
