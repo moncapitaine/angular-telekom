@@ -49,4 +49,9 @@ export class ProductService {
     const data = await result.json()
     this.productList$.next(data as Product[])
   }
+
+  public addNew(product: Partial<Product>) {
+    this.httpClient.post(`${productRestApiUrl}`,product)
+      .subscribe(response => console.log('response', response) )
+  }
 }

@@ -1,0 +1,13 @@
+<h2>Neues Produkt anlegen</h2>
+<form [formGroup]="productFormGroup" (ngSubmit)="onSubmit()">
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" formControlName="name">
+  <div *ngIf="productFormGroup.controls['name'].invalid && productFormGroup.controls['name'].touched">Fehler!!</div>
+<br />
+  <label for="description">Beschreibung: </label>
+  <textarea id="description" type="text" formControlName="description">
+  </textarea>
+<br />
+  <scale-button [disabled]="!productFormGroup.valid" type="submit">Speichern</scale-button>
+</form>
