@@ -9,34 +9,44 @@ const productRestApiUrl = 'http://localhost:4001/products'
   providedIn: 'root',
 })
 export class ProductService {
+  
+  public productList$ = new BehaviorSubject<Product[]>([])
   public currentProduct$ = new BehaviorSubject<Product | undefined>(undefined)
+  
   constructor(private httpClient: HttpClient) {
   }
 
+  // example getting rest data with HTTPClient
   public setCurrentProductId(id: string) {
     this.httpClient.get<Product>(`${productRestApiUrl}/${id}`).subscribe(data => {
       this.currentProduct$.next(data)
     })
   }
 
-  public getAllProducts$() {
-    return this.httpClient.get<Product[]>(productRestApiUrl)
-      .pipe(tap((data) => console.log('products received', data)))
+  // commented because users of this service will trigger http get requests
+  // every time they want to get a product list
 
-    // return of(exampleProductList)
-    //   .pipe(tap((data) => console.log('daten vor dem Delay erkannt', data)))
-    //   .pipe(delay(2000))
-    //   .pipe(tap((data) => console.log('daten nach dem Delay erkannt', data)));
-  }
+  // public getAllProducts$() {
+  //   return this.httpClient.get<Product[]>(productRestApiUrl)
+  //     .pipe(tap((data) => console.log('products received', data)))
+
+  //   // return of(exampleProductList)
+  //   //   .pipe(tap((data) => console.log('daten vor dem Delay erkannt', data)))
+  //   //   .pipe(delay(2000))
+  //   //   .pipe(tap((data) => console.log('daten nach dem Delay erkannt', data)));
+  // }
 
   public getProductById$(id: string) {
     return this.httpClient.get<Product>(`${productRestApiUrl}/${id}`)
   }
 
-  public async getProductsByFetchApi() {
+  // example getting data from REST with fetch API
+  public async reloadProductsByFetchApi() {
+    this.productList$.next([])
+    // todo: Promises in depth explain....
+    await new Promise(resolve => setTimeout(resolve, 1000))
     const result = await fetch(productRestApiUrl)
     const data = await result.json()
-    console.log(data)
-    return data as Product[]
+    this.productList$.next(data as Product[])
   }
 }
